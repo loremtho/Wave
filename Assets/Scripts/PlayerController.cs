@@ -82,10 +82,11 @@ public class PlayerController : MonoBehaviour
         WaterCheck();
         IsGround();
         TryJump();
-        if(GameManager.isWater)
+        TryRun();
+        /*if(GameManager.isWater)
         {
             TryRun();
-        }
+        }*/
         TryCrrouch();
         Move();
         if(!Inventory.inventoryActivated)
