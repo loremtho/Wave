@@ -2,20 +2,14 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MAT_CELESTE_EYES_Alternative
   m_Shader: {fileID: 4800000, guid: 9a05f5e278d7e794b861aa0979ece425, type: 3}
-  m_ValidKeywords:
-  - _DETAIL_MULX2
-  - _EMISSION
-  - _NORMALMAP
-  - _PARALLAXMAP
-  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
-  m_InvalidKeywords: []
+  m_ShaderKeywords: _DETAIL_MULX2 _EMISSION _NORMALMAP _PARALLAXMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -71,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
         //초기화
         applySpeed = walkSpeed;
-        originPosY = theCamera.transform.localPosition.y;
+        //originPosY = theCamera.transform.localPosition.y;
         applyCrouchPosY = originPosY;
     }
 
