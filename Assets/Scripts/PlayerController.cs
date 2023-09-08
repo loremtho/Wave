@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     //움직임 체크 변수
     private Vector3 lastPos;
+    
+    public Animator Playeranim;
 
 
 
@@ -69,6 +71,7 @@ public class PlayerController : MonoBehaviour
         theGunController = FindObjectOfType<GunController>();
         theCrosshair = FindObjectOfType<Crosshair>();
         theStatusController = FindObjectOfType<StatusController>();
+        Playeranim = GetComponent<Animator>();
 
         //초기화
         applySpeed = walkSpeed;
@@ -201,6 +204,7 @@ public class PlayerController : MonoBehaviour
 
         isRun = true;
         theCrosshair.RunningAnimation(isRun);
+        Playeranim.SetBool("Player_Run", true);
         theStatusController.DecreaseStamina(10);
         applySpeed = runSpeed;
     }
@@ -211,6 +215,7 @@ public class PlayerController : MonoBehaviour
         isRun = false;
         theCrosshair.RunningAnimation(isRun);
         applySpeed = walkSpeed;
+        Playeranim.SetBool("Player_Run", false);
     }
 
     private void Move() //플레이어 이동
@@ -231,9 +236,16 @@ public class PlayerController : MonoBehaviour
         if (!isRun && !isCrouch && isGround)
         {
             if (Vector3.Distance(lastPos, transform.position) >= 0.01f)
+            {
                 isWalk = true;
+                Playeranim.SetBool("Walk" , true);
+            }
             else
+            {
                 isWalk = false;
+                 Playeranim.SetBool("Walk" , false);
+            }
+             
 
             theCrosshair.WalkingAnimation(isWalk);
             lastPos = transform.position;
