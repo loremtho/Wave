@@ -189,8 +189,12 @@ public class PlayerController : MonoBehaviour
 
     private void Jump() //점프
     {
-        if (isCrouch) //않은 상태에서 점프로 해제
+        if (isCrouch)//않은 상태에서 점프로 해제
+        {
             Crouch();
+        } 
+
+        Playeranim.SetTrigger("Jump");   
         theStatusController.DecreaseStamina(100);
         myRigid.velocity = transform.up * jumpForce;
     }
@@ -204,7 +208,10 @@ public class PlayerController : MonoBehaviour
 
         isRun = true;
         theCrosshair.RunningAnimation(isRun);
-        Playeranim.SetBool("Player_Run", true);
+        if(isGround)
+        {
+            Playeranim.SetBool("Player_Run", true);
+        }
         theStatusController.DecreaseStamina(10);
         applySpeed = runSpeed;
     }
@@ -215,7 +222,11 @@ public class PlayerController : MonoBehaviour
         isRun = false;
         theCrosshair.RunningAnimation(isRun);
         applySpeed = walkSpeed;
-        Playeranim.SetBool("Player_Run", false);
+        if(isGround)
+        {
+            Playeranim.SetBool("Player_Run", false);
+        }
+     
     }
 
     private void Move() //플레이어 이동
@@ -238,12 +249,20 @@ public class PlayerController : MonoBehaviour
             if (Vector3.Distance(lastPos, transform.position) >= 0.01f)
             {
                 isWalk = true;
-                Playeranim.SetBool("Walk" , true);
+                if(isGround)
+                {
+                   Playeranim.SetBool("Walk" , true);
+                }
+            
             }
             else
             {
                 isWalk = false;
-                 Playeranim.SetBool("Walk" , false);
+                if(isGround)
+                {
+                    Playeranim.SetBool("Walk" , false);
+                }
+                 
             }
              
 
