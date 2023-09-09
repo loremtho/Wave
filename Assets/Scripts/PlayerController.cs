@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -50,6 +51,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float lookSensitivity;
 
+    //카메라 암 트랜스폼
+    /*[SerializeField]
+    private Transform cameraArm;
+    //캐릭터 바디
+    [SerializeField]
+    private Transform PlayerBody;
+    */
     //카메라 안계
     [SerializeField]
     private float cameraRotationLimit;
@@ -75,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
         //초기화
         applySpeed = walkSpeed;
-        //originPosY = theCamera.transform.localPosition.y;
+        originPosY = theCamera.transform.localPosition.y;
         applyCrouchPosY = originPosY;
     }
 
@@ -86,15 +94,13 @@ public class PlayerController : MonoBehaviour
         IsGround();
         TryJump();
         TryRun();
-        /*if(GameManager.isWater)
-        {
-            TryRun();
-        }*/
         TryCrrouch();
         Move();
+        //Move2();
         if(!Inventory.inventoryActivated)
         {
             CameraRotation();
+            //LookAround();
             CharacterRotation();
         }
         MoveCheck();
@@ -289,40 +295,5 @@ public class PlayerController : MonoBehaviour
         currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
 
         theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
-
-        /*if(!pauseCameraRotation)
-        {
-            float _xRotation = Input.GetAxisRaw("Mouse Y");
-            float _cameraRotationX = _xRotation * lookSensitivity;
-
-            currentCameraRotationX -= _cameraRotationX;
-            currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
-
-            theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
-        }*/
     }
-
-    //private bool pauseCameraRotation = false;
-
-    /*public IEnumerator TreeLookCoroutine(Vector3 _target)
-    {
-        pauseCameraRotation = true;
-
-        Quaternion direction = Quaternion.LookRotation(_target - theCamera.transform.position);
-        Vector3 eulerValue = direction.eulerAngles;
-        float destinationX = eulerValue.x;
-
-        while(Mathf.Abs(destinationX - currentCameraRotationX) >= 0.5f)
-        {
-            eulerValue = Quaternion.Lerp(theCamera.transform.localRotation, direction, 0.3f).eulerAngles;
-            theCamera .transform.localRotation = Quaternion.Euler(eulerValue.x, 0f, 0f);
-            currentCameraRotationX = theCamera.transform.localEulerAngles.x;
-            yield return null;
-        }
-
-        pauseCameraRotation = false;
-    }
-    */
-
-  
 }
