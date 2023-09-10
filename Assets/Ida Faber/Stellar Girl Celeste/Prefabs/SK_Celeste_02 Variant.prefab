@@ -13,15 +13,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a81acb98983e9b4a920218df3410b33, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 71.97143
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a81acb98983e9b4a920218df3410b33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -27.8344
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a81acb98983e9b4a920218df3410b33, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 87.05554
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a81acb98983e9b4a920218df3410b33, type: 3}
       propertyPath: m_LocalRotation.w
@@ -51,9 +51,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8433948828416635225, guid: 4a81acb98983e9b4a920218df3410b33, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4a81acb98983e9b4a920218df3410b33, type: 3}
       propertyPath: m_Name
-      value: SK_Celeste_02
+      value: SK_Celeste_02 Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a81acb98983e9b4a920218df3410b33, type: 3}
