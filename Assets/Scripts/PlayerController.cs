@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
         if (isCrouch) //않은 상태에서 달리기로 해제
             Crouch();
 
-        theGunController.CancelFinSight();
+        //theGunController.CancelFinSight();
 
         isRun = true;
         theCrosshair.RunningAnimation(isRun);

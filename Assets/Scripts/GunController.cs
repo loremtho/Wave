@@ -37,7 +37,7 @@ public class GunController : MonoBehaviour
     // Update is called once per frame
     private void Start()
     {
-        originPos = Vector3.zero;
+        //originPos = Vector3.zero;
         audioSource= GetComponent<AudioSource>();
         theCrosshair = FindObjectOfType<Crosshair>();
 
@@ -53,7 +53,7 @@ public class GunController : MonoBehaviour
             GunFireRateCalc();
             TryFire();
             TryReload();
-            TryFineSight();
+            //TryFineSight();
         }
        
     }
@@ -83,7 +83,7 @@ public class GunController : MonoBehaviour
                 Shoot();
             else
             {
-                CancelFinSight();
+                //CancelFinSight();
                 StartCoroutine(ReloadCoroutine());
 
             }
@@ -130,7 +130,7 @@ public class GunController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.R) && !isReload && currentGun.currentBulletCount < currentGun.reloadBulletCount)
         {
-            CancelFinSight();
+            //CancelFinSight();
             StartCoroutine(ReloadCoroutine());
         }
     }
@@ -149,7 +149,7 @@ public class GunController : MonoBehaviour
         if(currentGun.currentBulletCount >= 0 )
         {
             isReload = true;
-            currentGun.anim.SetTrigger("Reload");
+            //currentGun.anim.SetTrigger("Reload");
 
             currentGun.currentBulletCount += currentGun.currentBulletCount;
             currentGun.currentBulletCount = 0;
@@ -176,7 +176,7 @@ public class GunController : MonoBehaviour
     }
 
     //정조준
-    private void TryFineSight()
+    /*private void TryFineSight()
     {
         if(Input.GetButtonDown("Fire2") && !isReload)
         {
@@ -189,10 +189,10 @@ public class GunController : MonoBehaviour
         if (isFIneSightMode)
             FineSight();
             
-    }
+    }*/
 
     //정조준 로직
-    private void FineSight()
+    /*private void FineSight()
     {
         isFIneSightMode = !isFIneSightMode;
         currentGun.anim.SetBool("FineSightMode", isFIneSightMode);
@@ -210,10 +210,10 @@ public class GunController : MonoBehaviour
             StartCoroutine(FineSughtDeactivateCoroutine());
         }
 
-    }
+    }*/
 
     //정조준 활성화
-    IEnumerator FineSughtActivateCoroutine()
+    /*IEnumerator FineSughtActivateCoroutine()
     {
         while(currentGun.transform.localPosition != currentGun.fineSightOriginPos)
         {
@@ -230,7 +230,7 @@ public class GunController : MonoBehaviour
             currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, originPos, 0.2f);
             yield return null;
         }
-    }
+    }*/
 
     //반동
     IEnumerator RetroActionCoroutine()
@@ -303,12 +303,9 @@ public class GunController : MonoBehaviour
         {
             WeaponManager.currentWeapon.gameObject.SetActive(false);
         }
-
         currentGun = _gun;
         WeaponManager.currentWeapon = currentGun.GetComponent<Transform>();
-        WeaponManager.currentWeaponAnim = currentGun.anim;
-
-
+        //WeaponManager.currentWeaponAnim = currentGun.anim;
 
         currentGun.transform.localPosition = Vector3.zero;
         currentGun.gameObject.SetActive(true);
