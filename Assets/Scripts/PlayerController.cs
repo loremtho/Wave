@@ -237,6 +237,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move() //플레이어 이동
     {
+        Playeranim.SetBool("Walk" , true);
         float _moveDirX = Input.GetAxisRaw("Horizontal");
         float _moveDirZ = Input.GetAxisRaw("Vertical");
 
@@ -257,7 +258,7 @@ public class PlayerController : MonoBehaviour
                 isWalk = true;
                 if(isGround)
                 {
-                   Playeranim.SetBool("Walk" , true);
+                   
                 }
             
             }
