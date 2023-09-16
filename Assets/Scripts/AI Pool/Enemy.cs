@@ -6,7 +6,7 @@ using Redcode.Pools;
 
 public class Enemy : MonoBehaviour, IPoolObject
 {
-    public Transform target;
+    //public Transform target;
     public string idName;
     public Vector3 targetpos;
     public Animator anim;
@@ -22,8 +22,8 @@ public class Enemy : MonoBehaviour, IPoolObject
 
     void Awake()
     {
-        rigid = GetComponent<Rigidbody>();
-        boxCollider = GetComponent<BoxCollider>();
+        //rigid = GetComponent<Rigidbody>();
+        //boxCollider = GetComponent<BoxCollider>();
         //mat = GetComponentInChildren<MeshRenderer>().material;
         ai = GetComponent<NavMeshAgent>();
 
@@ -33,17 +33,18 @@ public class Enemy : MonoBehaviour, IPoolObject
     {
         //ai.SetDestination(target.position); //추적코드
 
+        
         Vector3 relVelocity = transform.InverseTransformDirection(ai.velocity);
         relVelocity.y = 0;
 
-        anim.SetFloat("speed" , relVelocity.magnitude / anim.transform.lossyScale.x);
-
+        //anim.SetFloat("Idle" , relVelocity.magnitude / anim.transform.lossyScale.x);
+        
 
         if(ai.remainingDistance <2f)
         {
             if(!isAtDestination)
             {
-                OntargetReached();
+                OnTargetReached();
 
                 isAtDestination = true;
             }
@@ -55,7 +56,7 @@ public class Enemy : MonoBehaviour, IPoolObject
 
     }
 
-    void OntargetReached()
+    void OnTargetReached()
     {
         GameManager.instance.ReturnPool(this);
     }
@@ -63,7 +64,6 @@ public class Enemy : MonoBehaviour, IPoolObject
     void OnEnable() 
     {
         Init();
-
     }
 
     void Init()
