@@ -4,19 +4,40 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static bool isPause = false; // 메뉴가 호출되면 true; //변경
+    public static GameManager instance;
+    
+    public int count;
+    public Transform[] points;
+
+    float timer;
+    bool isStop;
 
     public static bool isNight = false;
     public static bool isWater = false;
 
-    public static bool isPause = false; // 메뉴가 호출되면 true; //변경
 
     private WeaponManager theWM;
     private bool flag = false;
 
+    protected virtual void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         theWM = FindObjectOfType<WeaponManager>(); 
+    }
+
+    protected virtual void Spawn()
+    {
+
+    }
+
+    public virtual void ReturnPool(Enemy clone)
+    {
+
     }
 
     // Update is called once per frame
@@ -38,6 +59,24 @@ public class GameManager : MonoBehaviour
                 flag = false;
                 theWM.WeaponOut();
             }
+        }
+
+        if(isStop)
+        return;
+
+        timer += Time.deltaTime;
+
+        if(timer > 0.1f)
+        {
+            timer = 0f;
+            count++;
+            Spawn();
+        }
+
+        if(count == 1000)
+        {
+            Time.timeScale = 0.05f;
+            isStop = true;
         }
     }
 }
