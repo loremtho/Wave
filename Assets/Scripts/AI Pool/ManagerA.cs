@@ -13,7 +13,7 @@ public class ManagerA : GameManager
 
     protected override void Spawn()
     {
-        int ran = Random.Range(0, 6);
+        int ran = Random.Range(0, 1);
         Enemy newPlayer = poolManager.GetFromPool<Enemy>(ran);
     }
 
