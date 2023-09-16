@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour, IPoolObject
         //boxCollider = GetComponent<BoxCollider>();
         //mat = GetComponentInChildren<MeshRenderer>().material;
         ai = GetComponent<NavMeshAgent>();
+       
 
     }
 
