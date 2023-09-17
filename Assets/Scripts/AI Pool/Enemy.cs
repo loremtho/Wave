@@ -17,9 +17,6 @@ public class Enemy : MonoBehaviour //, IPoolObject 풀링 임시
 
     //public int score; 구현 예정 임시 점수나 재화등
 
-
-
-
     public Transform target;
     NavMeshAgent ai;
     Rigidbody rigid;

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public bool isBattle;
     public GameObject StartZone; //스테이지 게임 시작존 관리
 
+    public PlayerController player;
+
     //몬스터 관리*********************************
     public Transform[] enemyZone; 
     public GameObject[] enemies;
@@ -33,19 +35,33 @@ public class GameManager : MonoBehaviour
     private WeaponManager theWM;
     private bool flag = false;
 
+    /*
     protected virtual void Awake()
     {
-        //instance = this; 풀링 임시
+        instance = this; 풀링 임시
+    }
+    */
+
+    void Awake()
+    {
+        enemyList = new List<int>();
+
     }
 
     void Start()
     {
+        
         theWM = FindObjectOfType<WeaponManager>(); 
     }
 
     public void StageStart() //스테이지 시작시 원하는 오브젝트 비활성화 
     {
         StartZone.SetActive(false);
+
+        foreach(Transform zone in enemyZone) //게임 시작시 스폰 활성
+        zone.gameObject.SetActive(true);
+
+
         isBattle = true;
         StartCoroutine(InBattle());
 
@@ -56,6 +72,10 @@ public class GameManager : MonoBehaviour
         //플레이어 .transform.position = Vector3.up * 0.8f; 를 통해서 스테이지 끝난후 위치 바꾸는것도 가능
 
         StartZone.SetActive(true);
+
+        foreach(Transform zone in enemyZone) //게임 시작시 스폰 비활성
+        zone.gameObject.SetActive(false);
+
         isBattle = false;
         stage++;
 
@@ -63,10 +83,24 @@ public class GameManager : MonoBehaviour
 
     IEnumerator InBattle()
     {
-        yield return new WaitForSeconds(5);
-        StageEnd();
+        for(int index = 0; index < stage; index++)
+        {
+            int ran = Random.Range(0 ,2); //존 개수 몬스터 늘릴시 갯수 수정
+            enemyList.Add(ran);
+        }
+        while(enemyList.Count > 0)
+        {
+            int ranZone = Random.Range(0, 4); //몬스터 늘릴시 갯수 수정
+            GameObject instantEnemy = Instantiate(enemies[enemyList[0]], enemyZone[ranZone].position, enemyZone[ranZone].rotation);
+            Enemy enemy = instantEnemy.GetComponent<Enemy>();
+            enemy.target = player.transform;
+            enemyList.RemoveAt(0);
+             yield return new WaitForSeconds(5);
+        } 
+       
     }
 
+    /* 풀링 임시
     protected virtual void Spawn()
     {
 
@@ -76,6 +110,7 @@ public class GameManager : MonoBehaviour
     {
 
     }
+    */
 
     // Update is called once per frame
     void Update()
