@@ -1,8 +1,9 @@
 using UnityEngine;
 using Redcode.Pools;
 
-public class ManagerA : GameManager
+public class ManagerA : GameManager //풀링 예제
 {
+    /*
     PoolManager poolManager;
 
     protected override void Awake()
@@ -21,6 +22,7 @@ public class ManagerA : GameManager
     {
         poolManager.TakeToPool<Enemy>(clone.idName,  clone);
     }
+    */
    
 
 }

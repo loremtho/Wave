@@ -4,17 +4,27 @@ using UnityEngine;
 using UnityEngine.AI;
 using Redcode.Pools;
 
-public class Enemy : MonoBehaviour, IPoolObject
+public class Enemy : MonoBehaviour //, IPoolObject 풀링 임시
 {
-    //public Transform target;
+
+    /* 풀링 예제
     public string idName;
     public Vector3 targetpos;
     public Animator anim;
     bool isAtDestination;
+    Material mat;
+    */
+
+    //public int score; 구현 예정 임시 점수나 재화등
+
+
+
+
+    public Transform target;
+    NavMeshAgent ai;
     Rigidbody rigid;
     BoxCollider boxCollider;
-    //Material mat;
-    NavMeshAgent ai;
+
 
 
     
@@ -22,23 +32,24 @@ public class Enemy : MonoBehaviour, IPoolObject
 
     void Awake()
     {
-        //rigid = GetComponent<Rigidbody>();
-        //boxCollider = GetComponent<BoxCollider>();
-        //mat = GetComponentInChildren<MeshRenderer>().material;
+        rigid = GetComponent<Rigidbody>();
+        boxCollider = GetComponent<BoxCollider>();
         ai = GetComponent<NavMeshAgent>();
+        //mat = GetComponentInChildren<MeshRenderer>().material;
+        
        
 
     }
 
     void Update()
     {
-        //ai.SetDestination(target.position); //추적코드
+        ai.SetDestination(target.position); //추적코드
 
-        
+        /*풀링 임시
         Vector3 relVelocity = transform.InverseTransformDirection(ai.velocity);
         relVelocity.y = 0;
 
-        //anim.SetFloat("Idle" , relVelocity.magnitude / anim.transform.lossyScale.x);
+        anim.SetFloat("Idle" , relVelocity.magnitude / anim.transform.lossyScale.x);
         
 
         if(ai.remainingDistance <2f)
@@ -54,9 +65,11 @@ public class Enemy : MonoBehaviour, IPoolObject
         {
             isAtDestination = false;
         }
+        */
 
     }
 
+    /*풀링 임시
     void OnTargetReached()
     {
         GameManager.instance.ReturnPool(this);
@@ -83,4 +96,5 @@ public class Enemy : MonoBehaviour, IPoolObject
     {
         Init();
     }
+    */
 }
