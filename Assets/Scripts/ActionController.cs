@@ -25,8 +25,8 @@ public class ActionController : MonoBehaviour
     private Text actionText;
     [SerializeField]
     private Inventory theinventory;
-    [SerializeField]
-    private ComputerKit theComputer;
+    /*[SerializeField]
+    private ComputerKit theComputer;*/
 
 
     void Update()
@@ -41,7 +41,7 @@ public class ActionController : MonoBehaviour
         {
             CheckItem();
             CanPickUp();
-            CanComputerPowerOn();
+            //CanComputerPowerOn();
         }
     }
 
@@ -53,10 +53,10 @@ public class ActionController : MonoBehaviour
             {
                 ItemlnfoAppear();
             }
-            else if(hitinfo.transform.tag == "Computer")
+            /*else if(hitinfo.transform.tag == "Computer")
             {
                 ComputerlnfoAppear();
-            }
+            }*/
         }
         else
         {
@@ -84,7 +84,7 @@ public class ActionController : MonoBehaviour
         actionText.text = hitinfo.transform.GetComponent<ItemPickUp>().item.itemName + "획득" + "<color=yellow>" + "(E)" + "</color>";
     }
 
-    private void CanComputerPowerOn()
+    /*private void CanComputerPowerOn()
     {
         if(lookComputer)
         {
@@ -108,7 +108,7 @@ public class ActionController : MonoBehaviour
             actionText.text =  " 컴퓨터 가동 " + "<color=yellow>" + "(E)" + "</color>";
         }
         
-    }
+    }*/
 
     private void lnfoDisappear()
     {

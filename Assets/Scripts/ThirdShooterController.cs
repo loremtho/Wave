@@ -7,16 +7,18 @@ using UnityEngine.InputSystem;
 public class ThirdShooterController : MonoBehaviour
 {
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
-    [SerializeField] private Transform debugTransform;
+    //[SerializeField] private Transform debugTransform;
     [SerializeField] private Transform bulletPrefab;
     [SerializeField] private Transform spawnBulletPos;
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
+    private PlayerController theplayerController;
     // Start is called before the first frame update
     void Awake()
     {
-        thirdPersonController = GetComponent<ThirdPersonController>();
-        starterAssetsInputs = GetComponent<StarterAssetsInputs>();
+        //thirdPersonController = GetComponent<ThirdPersonController>();
+        //starterAssetsInputs = GetComponent<StarterAssetsInputs>();
+        theplayerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -32,13 +34,14 @@ public class ThirdShooterController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
         if(Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
         {
-            debugTransform.position = raycastHit.point;
+            //debugTransform.position = raycastHit.point;
             mouseWoridPos = raycastHit.point;
         }
 
-        if(starterAssetsInputs.aim)
+        //if(starterAssetsInputs.aim)
+        if(theplayerController.aim)
         {
-            thirdPersonController.SetRotateOnMove(true);
+            //thirdPersonController.SetRotateOnMove(true);
             Vector3 worldAimTarget = mouseWoridPos;
             worldAimTarget.y = transform.position.y;
             Vector3 aimDir = (worldAimTarget - transform.position).normalized;
@@ -46,11 +49,12 @@ public class ThirdShooterController : MonoBehaviour
             transform.forward = Vector3.Lerp(transform.forward, aimDir, Time.deltaTime * 20f);
         }
 
-        if(starterAssetsInputs.shoot)
+        //if(starterAssetsInputs.shoot)
+        if(Input.GetButton("Fire1"))
         {
             Vector3 aimDir = (mouseWoridPos - spawnBulletPos.position).normalized;
             Instantiate(bulletPrefab, spawnBulletPos.position, Quaternion.LookRotation(aimDir, Vector3.up));
-            starterAssetsInputs.shoot = false;
+            //starterAssetsInputs.shoot = false;
         }
     }
 }

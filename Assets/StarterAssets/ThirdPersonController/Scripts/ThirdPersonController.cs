@@ -393,7 +393,7 @@ namespace StarterAssets
             }
         }
 
-        public void SetRotateOnMove(bool newRotateOnMove)
+        public void SetRotateOnMove(bool newRotateOnMove) //
         {
             _rotateOnMove = newRotateOnMove;
         }

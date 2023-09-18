@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private bool isRun = false;
     private bool isCrouch = false;
     private bool isGround = true;
+    public bool aim = true;
    
 
     //움직임 체크 변수
@@ -91,7 +92,7 @@ public class PlayerController : MonoBehaviour
         Move();
         if(!Inventory.inventoryActivated)
         {
-            //CameraRotation();
+            CameraRotation();
             CharacterRotation();
         }
         MoveCheck();
@@ -278,7 +279,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    /*private void CameraRotation() //카메라 시점 설정
+    private void CameraRotation() //카메라 시점 설정
     {
         float _xRotation = Input.GetAxisRaw("Mouse Y");
         float _cameraRotationX = _xRotation * lookSensitivity;
@@ -287,5 +288,5 @@ public class PlayerController : MonoBehaviour
         currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
 
         theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
-    }*/
+    }
 }

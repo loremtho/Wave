@@ -72,14 +72,14 @@ public class ItemEffectDatabase : MonoBehaviour
                             case "DP":
                                 thePlayerStatus.IncreaseDP(itemEffects[x].num[y]);
                                 break;
-                            case "HUNGRY":
+                            /*case "HUNGRY":
                                 thePlayerStatus.IncreaseHungry(itemEffects[x].num[y]);
                                 break;
                             case "THIRSTY":
                                 thePlayerStatus.IncreaseThirsty(itemEffects[x].num[y]);
                                 break;
                             case "SATISFY":
-                                break;
+                                break;*/
                             default:
                                 Debug.Log("잘못된 Status 부위.HP, SP,  DP, HUNGRY, THIRSTY, SATISFY 만 가능합니다. ");
                                 break;

@@ -61,6 +61,10 @@ public class StatusController : MonoBehaviour
     //필요한 이미지
     [SerializeField]
     private Image[] images_Gauge;
+    [SerializeField]
+    private Slider[] sliders;
+    [SerializeField]
+    private Image[] sliders_Gauge;
 
     private const int HP = 0, DP = 1, SP = 2, HUNGRY = 3, THIRSTY = 4, SATISFY = 5;
 
@@ -71,18 +75,26 @@ public class StatusController : MonoBehaviour
         currentHp = hp;
         currentDp = dp;
         currentSp = sp;
-        currentHungry = hungry;
+        /*currentHungry = hungry;
         currentThirsty = thirsty;
-        currentSatisfy= satisfy;
+        currentSatisfy= satisfy;*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        Hungry();
-        Thirsty();
+        //Hungry();
+        //Thirsty();
         SPRechargeTime();
         SPRecover();
+        //GaugeUpdate();
+    }
+
+    private void OnSliderValueChanged(int newValue)
+    {
+        currentHp = newValue * hp;
+        currentSp = newValue * sp;
+        currentDp = newValue * dp;
         GaugeUpdate();
     }
 
@@ -109,7 +121,7 @@ public class StatusController : MonoBehaviour
             currentSp += spIncreaseSpeed;
         }
     }
-    private void Hungry()
+    /*private void Hungry()
     {
         if(currentHungry > 0)
         {
@@ -151,16 +163,19 @@ public class StatusController : MonoBehaviour
         {
             Debug.Log("목마름 수치가 0이 되었습니다");
         }
-    }
+    }*/
 
     private void GaugeUpdate()
     {
-        images_Gauge[HP].fillAmount = (float)currentHp / hp;
-        images_Gauge[SP].fillAmount = (float)currentSp / sp;
-        images_Gauge[DP].fillAmount = (float)currentDp / dp;
-        images_Gauge[HUNGRY].fillAmount = (float)currentHungry / hungry;
-        images_Gauge[THIRSTY].fillAmount = (float)currentThirsty / thirsty;
-        images_Gauge[SATISFY].fillAmount = (float)currentSatisfy / satisfy;
+        //images_Gauge[HP].fillAmount = (float)currentHp / hp;
+        sliders_Gauge[HP].fillAmount = (float)currentHp / hp;
+        //images_Gauge[SP].fillAmount = (float)currentSp / sp;
+        sliders_Gauge[SP].fillAmount = (float)currentSp / sp;
+        //images_Gauge[DP].fillAmount = (float)currentDp / dp;
+        sliders_Gauge[DP].fillAmount = (float)currentDp / dp;
+        //images_Gauge[HUNGRY].fillAmount = (float)currentHungry / hungry;
+        //images_Gauge[THIRSTY].fillAmount = (float)currentThirsty / thirsty;
+        //images_Gauge[SATISFY].fillAmount = (float)currentSatisfy / satisfy;
 
     }
 
@@ -227,7 +242,7 @@ public class StatusController : MonoBehaviour
         }
     }
 
-    public void IncreaseHungry(int _count)
+    /*public void IncreaseHungry(int _count)
     {
         if (currentHungry + _count < hungry)
         {
@@ -275,7 +290,7 @@ public class StatusController : MonoBehaviour
             currentThirsty -= _count;
         }
 
-    }
+    }*/
 
 
 
