@@ -67,11 +67,11 @@ public class WeaponManager : MonoBehaviour
     public IEnumerator ChangeWeaponCoroutine(string _type, string _name)
     {
         isChangeWeapon = true;
-        currentWeaponAnim.SetTrigger("Weapon_Out");
+        //currentWeaponAnim.SetTrigger("Weapon_Out");
 
         yield return new WaitForSeconds(changeWeaponDelayTime);
 
-        CancelPreWeaponAcuion();
+        CancelPreWeaponAction();
         WeaponChange(_type, _name);
 
         yield return new WaitForSeconds(changeWeaponEndDelayTime);
@@ -80,12 +80,12 @@ public class WeaponManager : MonoBehaviour
         isChangeWeapon = false;
     }
 
-    private void CancelPreWeaponAcuion()
+    private void CancelPreWeaponAction()
     {
         switch(currentWeaponType)
         {
             case "GUN":
-                theGunController.CancelFinSight();
+                //theGunController.CancelFinSight();
                 theGunController.CanvelReload();
                 GunController.isActivate= false;
                 break;
@@ -121,7 +121,7 @@ public class WeaponManager : MonoBehaviour
     public IEnumerator WeaponInCoroutine()
     {
         isChangeWeapon = true;
-        currentWeaponAnim.SetTrigger("Weapon_Out");
+        //currentWeaponAnim.SetTrigger("Weapon_Out");
 
         yield return new WaitForSeconds(changeWeaponDelayTime);
 

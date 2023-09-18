@@ -51,13 +51,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float lookSensitivity;
 
-    //카메라 암 트랜스폼
-    /*[SerializeField]
-    private Transform cameraArm;
-    //캐릭터 바디
-    [SerializeField]
-    private Transform PlayerBody;
-    */
     //카메라 안계
     [SerializeField]
     private float cameraRotationLimit;
@@ -96,11 +89,9 @@ public class PlayerController : MonoBehaviour
         TryRun();
         TryCrrouch();
         Move();
-        //Move2();
         if(!Inventory.inventoryActivated)
         {
-            CameraRotation();
-            //LookAround();
+            //CameraRotation();
             CharacterRotation();
         }
         MoveCheck();
@@ -210,7 +201,7 @@ public class PlayerController : MonoBehaviour
         if (isCrouch) //않은 상태에서 달리기로 해제
             Crouch();
 
-        theGunController.CancelFinSight();
+        //theGunController.CancelFinSight();
 
         isRun = true;
         theCrosshair.RunningAnimation(isRun);
@@ -287,7 +278,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void CameraRotation() //카메라 시점 설정
+    /*private void CameraRotation() //카메라 시점 설정
     {
         float _xRotation = Input.GetAxisRaw("Mouse Y");
         float _cameraRotationX = _xRotation * lookSensitivity;
@@ -296,5 +287,5 @@ public class PlayerController : MonoBehaviour
         currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
 
         theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
-    }
+    }*/
 }
