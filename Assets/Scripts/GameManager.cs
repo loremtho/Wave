@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static bool isPause = false; // 메뉴가 호출되면 true; //변경
     
     public int stage;
+
+    public Text stageTxt;
     public bool isBattle;
     public GameObject StartZone; //스테이지 게임 시작존 관리
 
@@ -19,11 +22,6 @@ public class GameManager : MonoBehaviour
 
     //********************************
 
-    /* 풀링 임시 예제
-     public static GameManager instance; //생성 관리
-    public int count;
-    public Transform[] points;
-    */
 
     float timer;
     bool isStop;
@@ -35,12 +33,6 @@ public class GameManager : MonoBehaviour
     private WeaponManager theWM;
     private bool flag = false;
 
-    /*
-    protected virtual void Awake()
-    {
-        instance = this; 풀링 임시
-    }
-    */
 
     void Awake()
     {
@@ -125,5 +117,11 @@ public class GameManager : MonoBehaviour
         }
 
  
+    }
+
+    void LateUpdate() 
+    {
+        stageTxt.text = "Wave " + stage + " / 5";
+   
     }
 }
