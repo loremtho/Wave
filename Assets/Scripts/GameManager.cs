@@ -69,11 +69,11 @@ public class GameManager : MonoBehaviour
 
     public void StageEnd()  //스테이지 끝난후 활성화
     {
-        //플레이어.transform.position = Vector3.up * 0.8f; 를 통해서 스테이지 끝난후 위치 바꾸는것도 가능
+        //플레이어 .transform.position = Vector3.up * 0.8f; 를 통해서 스테이지 끝난후 위치 바꾸는것도 가능
 
         StartZone.SetActive(true);
 
-        foreach(Transform zone in enemyZone) //스폰 비활성
+        foreach(Transform zone in enemyZone) //게임 시작시 스폰 비활성
         zone.gameObject.SetActive(false);
 
         isBattle = false;
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
     {
         for(int index = 0; index < stage; index++)
         {
-            int ran = Random.Range(0 ,3); //존 개수 몬스터 늘릴시 갯수 수정
+            int ran = Random.Range(0 ,2); //존 개수 몬스터 늘릴시 갯수 수정
             enemyList.Add(ran);
         }
         while(enemyList.Count > 0)
@@ -95,15 +95,24 @@ public class GameManager : MonoBehaviour
             Enemy enemy = instantEnemy.GetComponent<Enemy>();
             enemy.target = player.transform;
             enemyList.RemoveAt(0);
-            yield return new WaitForSeconds(4);
-         
+             yield return new WaitForSeconds(5);
         } 
-        yield return new WaitForSeconds(4f);
-        StageEnd();
+       
+    }
+
+    /* 풀링 임시
+    protected virtual void Spawn()
+    {
 
     }
 
-  
+    public virtual void ReturnPool(Enemy clone)
+    {
+
+    }
+    */
+
+    // Update is called once per frame
     void Update()
     {
         if(isWater)
@@ -124,6 +133,24 @@ public class GameManager : MonoBehaviour
             }
         }
 
- 
+        if(isStop)
+        return;
+
+        /* 풀링 임시
+        timer += Time.deltaTime;
+
+        if(timer > 0.1f)
+        {
+            timer = 0f;
+            count++;
+            Spawn();
+        }
+
+        if(count == 1000)
+        {
+            Time.timeScale = 0.05f;
+            isStop = true;
+        }
+        */ 
     }
 }
