@@ -4,23 +4,22 @@ using UnityEngine;
 using UnityEngine.AI;
 using Redcode.Pools;
 
-public class Enemy : MonoBehaviour //, IPoolObject 풀링 임시
+public class Enemy : MonoBehaviour 
 {
 
-    /* 풀링 예제
-    public string idName;
-    public Vector3 targetpos;
-    public Animator anim;
-    bool isAtDestination;
-    Material mat;
-    */
+  
 
-    //public int score; 구현 예정 임시 점수나 재화등
-
+   
     public Transform target;
     NavMeshAgent ai;
     Rigidbody rigid;
     BoxCollider boxCollider;
+
+    public BoxCollider meleeArea;
+
+    public bool isAttack;
+
+    public Animator anim;
 
 
 
@@ -32,9 +31,6 @@ public class Enemy : MonoBehaviour //, IPoolObject 풀링 임시
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
         ai = GetComponent<NavMeshAgent>();
-        //mat = GetComponentInChildren<MeshRenderer>().material;
-        
-       
 
     }
 
@@ -42,56 +38,51 @@ public class Enemy : MonoBehaviour //, IPoolObject 풀링 임시
     {
         ai.SetDestination(target.position); //추적코드
 
-        /*풀링 임시
-        Vector3 relVelocity = transform.InverseTransformDirection(ai.velocity);
-        relVelocity.y = 0;
+    }
 
-        anim.SetFloat("Idle" , relVelocity.magnitude / anim.transform.lossyScale.x);
+    void Targerting()
+    {
+        float targetRadius = 1.5f;
+        float targetRange = 3f;
+
+        RaycastHit[] rayHits =
+        Physics.SphereCastAll(transform.position,
+        targetRadius,
+        transform.forward,
+        targetRange,
+        LayerMask.GetMask("Player"));
+
+        if(rayHits.Length > 0 && !isAttack)
+        {
+            StartCoroutine(Attack());
+        }
+
+
+    }
+
+    IEnumerator Attack()
+    {
+        isAttack = true;
+        anim.SetBool("Attack", true);
+        meleeArea.enabled = true;
+
+        yield return new WaitForSeconds(0.2f);
+        meleeArea.enabled = true;
+
+        yield return new WaitForSeconds(1f);
+        meleeArea.enabled = false;
         
-
-        if(ai.remainingDistance <2f)
-        {
-            if(!isAtDestination)
-            {
-                OnTargetReached();
-
-                isAtDestination = true;
-            }
-        }
-        else
-        {
-            isAtDestination = false;
-        }
-        */
-
-    }
-
-    /*풀링 임시
-    void OnTargetReached()
-    {
-        GameManager.instance.ReturnPool(this);
-    }
-
-    void OnEnable() 
-    {
-        Init();
-    }
-
-    void Init()
-    {
-        transform.position = new Vector3(Random.Range(-2f , 2f), 0.7f, Random.Range(-2f, 2f));
-        Transform[] spawnPos = GameManager.instance.points;
-        ai.SetDestination(spawnPos[Random.Range(0, spawnPos.Length)].position);
-    }
-
-    public void OnCreatedInPool()
-    {
+        isAttack = false;
+        anim.SetBool("Attack", false);
         
     }
 
-    public void OnGettingFromPool()
+    void FixedUpdate()
     {
-        Init();
+        Targerting();
+
+        
     }
-    */
+
+ 
 }
