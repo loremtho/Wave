@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     private bool isRun = false;
     private bool isCrouch = false;
     private bool isGround = true;
-    public bool aim = true;
    
 
     //움직임 체크 변수

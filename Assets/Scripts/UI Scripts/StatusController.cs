@@ -62,9 +62,11 @@ public class StatusController : MonoBehaviour
     [SerializeField]
     private Image[] images_Gauge;
     [SerializeField]
-    private Slider[] sliders;
+    private Slider hpbar;
     [SerializeField]
-    private Image[] sliders_Gauge;
+    private Slider spbar;
+    [SerializeField]
+    private Slider dpbar;
 
     private const int HP = 0, DP = 1, SP = 2, HUNGRY = 3, THIRSTY = 4, SATISFY = 5;
 
@@ -87,16 +89,10 @@ public class StatusController : MonoBehaviour
         //Thirsty();
         SPRechargeTime();
         SPRecover();
-        //GaugeUpdate();
+        GaugeUpdate();
+        BarValue();
     }
 
-    private void OnSliderValueChanged(int newValue)
-    {
-        currentHp = newValue * hp;
-        currentSp = newValue * sp;
-        currentDp = newValue * dp;
-        GaugeUpdate();
-    }
 
     private void SPRechargeTime()
     {
@@ -168,15 +164,25 @@ public class StatusController : MonoBehaviour
     private void GaugeUpdate()
     {
         //images_Gauge[HP].fillAmount = (float)currentHp / hp;
-        sliders_Gauge[HP].fillAmount = (float)currentHp / hp;
+        images_Gauge[HP].fillAmount = (float)currentHp / hp;
         //images_Gauge[SP].fillAmount = (float)currentSp / sp;
-        sliders_Gauge[SP].fillAmount = (float)currentSp / sp;
+        images_Gauge[SP].fillAmount = (float)currentSp / sp;
         //images_Gauge[DP].fillAmount = (float)currentDp / dp;
-        sliders_Gauge[DP].fillAmount = (float)currentDp / dp;
+        images_Gauge[DP].fillAmount = (float)currentDp / dp;
         //images_Gauge[HUNGRY].fillAmount = (float)currentHungry / hungry;
         //images_Gauge[THIRSTY].fillAmount = (float)currentThirsty / thirsty;
         //images_Gauge[SATISFY].fillAmount = (float)currentSatisfy / satisfy;
 
+    }
+
+    private void BarValue()
+    {
+        //hpbar.value = currentHp / hp;
+        hpbar.value = Mathf.Lerp(hpbar.value, currentHp / hp, Time.deltaTime * 10f);
+        //spbar.value = currentHp / sp;
+        spbar.value = Mathf.Lerp(spbar.value, currentSp / sp, Time.deltaTime * 10f);
+        //dpbar.value = currentHp / dp;
+        dpbar.value = Mathf.Lerp(dpbar.value, currentDp / dp, Time.deltaTime * 10f);
     }
 
     public void IncreaseHP(int _count)

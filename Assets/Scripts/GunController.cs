@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GunController : MonoBehaviour
 {
@@ -30,19 +31,18 @@ public class GunController : MonoBehaviour
     private Camera theCam;
     private Crosshair theCrosshair;
 
-
     [SerializeField]
-    private GameObject hit_effect_prefad;
+    private GameObject hit_effect_prefab;
 
     // Update is called once per frame
     private void Start()
     {
-        //originPos = Vector3.zero;
+        originPos = Vector3.zero;
         audioSource= GetComponent<AudioSource>();
         theCrosshair = FindObjectOfType<Crosshair>();
-
-
- 
+        // 시작하고 마우스 커서 잠그기
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -58,12 +58,13 @@ public class GunController : MonoBehaviour
        
     }
 
+
+
     //연사속도 재계산
     private void GunFireRateCalc()
     {
         if (currentFireRate > 0)
             currentFireRate -= Time.deltaTime; 
-
     }
 
     private void TryFire()
@@ -121,7 +122,7 @@ public class GunController : MonoBehaviour
                         0)
             , out hitlnfo, currentGun.range))
         {
-            var clone = Instantiate(hit_effect_prefad, hitlnfo.point, Quaternion.LookRotation(hitlnfo.normal));
+            var clone = Instantiate(hit_effect_prefab, hitlnfo.point, Quaternion.LookRotation(hitlnfo.normal));
             Destroy(clone, 2f);
         }
     }
