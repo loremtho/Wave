@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private bool isRun = false;
     private bool isCrouch = false;
     private bool isGround = true;
+    public bool aim = true;
    
 
     //움직임 체크 변수
@@ -78,6 +79,18 @@ public class PlayerController : MonoBehaviour
         applySpeed = walkSpeed;
         originPosY = theCamera.transform.localPosition.y;
         applyCrouchPosY = originPosY;
+    }
+    
+    void FreezeRotation()
+    {
+        myRigid.angularVelocity = Vector3.zero;
+    }
+
+
+    void FixedUpdate()
+    {
+        FreezeRotation();
+
     }
 
     // Update is called once per frame
@@ -288,4 +301,6 @@ public class PlayerController : MonoBehaviour
 
         theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
     }
+
+    
 }

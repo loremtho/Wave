@@ -21,9 +21,29 @@ public class Enemy : MonoBehaviour
 
     public Animator anim;
 
+    public bool isChase;
+
+    private int hp;
+    private int currentHp;
 
 
-    
+      void FreezeVelocity()
+    {
+        if(isChase)
+        {
+            rigid.velocity = Vector3.zero;
+            rigid.angularVelocity = Vector3.zero;
+        }
+ 
+    }
+
+
+    void FixedUpdate()
+    {
+        FreezeVelocity();
+        Targerting();
+
+    }
 
 
     void Awake()
@@ -31,12 +51,27 @@ public class Enemy : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
         ai = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animator>();
+        
+
+        Invoke("ChaseStart", 2);
+
+    }
+
+    void ChaseStart()
+    {
+        isChase = true;
+        anim.SetBool("isWalk", true);
+
 
     }
 
     void Update()
     {
-        ai.SetDestination(target.position); //추적코드
+        if(isChase) //
+        {
+            ai.SetDestination(target.position); //추적코드
+        }
 
     }
 
@@ -63,7 +98,7 @@ public class Enemy : MonoBehaviour
     IEnumerator Attack()
     {
         isAttack = true;
-        anim.SetBool("Attack", true);
+        anim.SetBool("isAttack", true);
         meleeArea.enabled = true;
 
         yield return new WaitForSeconds(0.2f);
@@ -73,16 +108,20 @@ public class Enemy : MonoBehaviour
         meleeArea.enabled = false;
         
         isAttack = false;
-        anim.SetBool("Attack", false);
+        anim.SetBool("isAttack", false);
         
     }
 
-    void FixedUpdate()
+    IEnumerator OnDamage()
     {
-        Targerting();
 
-        
+        //mat.color = Color.red;
+
+        yield return new WaitForSeconds(0.1f);
+
     }
+
+
 
  
 }
