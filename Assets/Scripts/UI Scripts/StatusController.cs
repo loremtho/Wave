@@ -61,12 +61,12 @@ public class StatusController : MonoBehaviour
     //필요한 이미지
     [SerializeField]
     private Image[] images_Gauge;
-    [SerializeField]
+    /*[SerializeField]
     private Slider hpbar;
     [SerializeField]
     private Slider spbar;
     [SerializeField]
-    private Slider dpbar;
+    private Slider dpbar;*/
 
     private const int HP = 0, DP = 1, SP = 2, HUNGRY = 3, THIRSTY = 4, SATISFY = 5;
 
