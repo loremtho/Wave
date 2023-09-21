@@ -90,7 +90,7 @@ public class StatusController : MonoBehaviour
         SPRechargeTime();
         SPRecover();
         GaugeUpdate();
-        BarValue();
+        //BarValue();
     }
 
 
@@ -163,27 +163,24 @@ public class StatusController : MonoBehaviour
 
     private void GaugeUpdate()
     {
-        //images_Gauge[HP].fillAmount = (float)currentHp / hp;
+        
         images_Gauge[HP].fillAmount = (float)currentHp / hp;
-        //images_Gauge[SP].fillAmount = (float)currentSp / sp;
         images_Gauge[SP].fillAmount = (float)currentSp / sp;
-        //images_Gauge[DP].fillAmount = (float)currentDp / dp;
         images_Gauge[DP].fillAmount = (float)currentDp / dp;
-        //images_Gauge[HUNGRY].fillAmount = (float)currentHungry / hungry;
-        //images_Gauge[THIRSTY].fillAmount = (float)currentThirsty / thirsty;
-        //images_Gauge[SATISFY].fillAmount = (float)currentSatisfy / satisfy;
+        /*images_Gauge[HUNGRY].fillAmount = (float)currentHungry / hungry;
+        images_Gauge[THIRSTY].fillAmount = (float)currentThirsty / thirsty;
+        images_Gauge[SATISFY].fillAmount = (float)currentSatisfy / satisfy;*/
+        //배고픔 코드
 
     }
 
-    private void BarValue()
+    /*private void BarValue()
     {
-        //hpbar.value = currentHp / hp;
         hpbar.value = Mathf.Lerp(hpbar.value, currentHp / hp, Time.deltaTime * 10f);
-        //spbar.value = currentHp / sp;
         spbar.value = Mathf.Lerp(spbar.value, currentSp / sp, Time.deltaTime * 10f);
-        //dpbar.value = currentHp / dp;
         dpbar.value = Mathf.Lerp(dpbar.value, currentDp / dp, Time.deltaTime * 10f);
-    }
+        // 슬라이더 부드럽게 감소시키기
+    }*/
 
     public void IncreaseHP(int _count)
     {
