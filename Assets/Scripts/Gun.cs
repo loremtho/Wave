@@ -6,16 +6,16 @@ public class Gun : MonoBehaviour
 {
 
     public string gunName;
-    public float range;
+    //public float range;
     public float accuracy;
     public float fireRate;
     public float reloadTime;
 
     public int damage;
 
-    public int reloadBulletCount; //ÀçÀåÀü °³¼ö
+    public int reloadBulletCount; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public int currentBulletCount; //ÅºÃ¢
-    public int maxBulletCount; //ÃÖ´ë ¼ÒÀ¯
+    public int maxBulletCount; //ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½
     public int carryBulletCount; 
 
     public float retroActionForce;

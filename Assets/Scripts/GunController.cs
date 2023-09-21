@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,7 +25,7 @@ public class GunController : MonoBehaviour
     private Vector3 originPos;
     private AudioSource audioSource;
 
-    //레이저 충동 정보 받아옴
+    //레이저 충돌 정보 받아옴
     private RaycastHit hitlnfo;
 
     [SerializeField]
@@ -33,11 +34,15 @@ public class GunController : MonoBehaviour
 
     [SerializeField]
     private GameObject hit_effect_prefab;
+    [SerializeField]
+    private TrailRenderer BulletTrail;
+    [SerializeField]
+    private Transform BulletPos;
 
     // Update is called once per frame
     private void Start()
     {
-        originPos = Vector3.zero;
+        //originPos = Vector3.zero;
         audioSource= GetComponent<AudioSource>();
         theCrosshair = FindObjectOfType<Crosshair>();
     }
@@ -100,9 +105,9 @@ public class GunController : MonoBehaviour
         //총기 반동 코루틴
         StopAllCoroutines();
         StartCoroutine(RetroActionCoroutine());
-        Debug.Log("총 발사함");
 
     }
+
 
 
     //맞는 판정
@@ -112,11 +117,30 @@ public class GunController : MonoBehaviour
             new Vector3(Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
                         Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
                         0)
-            , out hitlnfo, currentGun.range))
+            , out hitlnfo/*, currentGun.Range*/))
         {
+            Debug.DrawLine(BulletPos.position, hitlnfo.point, Color.red);
+            TrailRenderer trail = Instantiate(BulletTrail, BulletPos.position, Quaternion.identity);
+            StartCoroutine(SpawnTrail(trail, hitlnfo));
             var clone = Instantiate(hit_effect_prefab, hitlnfo.point, Quaternion.LookRotation(hitlnfo.normal));
-            Destroy(clone, 2f);
+            Destroy(clone, 1f);
         }
+    }
+
+    private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    {
+        float time = 0;
+        Vector3 startPos = BulletTrail.transform.position;
+
+        while(time < 1)
+        {
+            BulletTrail.transform.position = Vector3.Lerp(startPos, hit.point, time);
+            time += Time.deltaTime / trail.time;
+
+            yield return null;
+        }
+        trail.transform.position = hit.point;
+        Destroy(trail.gameObject, trail.time);
     }
 
     private void TryReload()
