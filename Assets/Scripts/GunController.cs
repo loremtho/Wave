@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class GunController : MonoBehaviour
 {
     //활성화여부
-    public static bool isActivate= false;
+    public static bool isActivate= true;
 
     //현재 장착된 총
     [SerializeField]
@@ -40,9 +40,6 @@ public class GunController : MonoBehaviour
         originPos = Vector3.zero;
         audioSource= GetComponent<AudioSource>();
         theCrosshair = FindObjectOfType<Crosshair>();
-        // 시작하고 마우스 커서 잠그기
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     void Update()
@@ -86,13 +83,8 @@ public class GunController : MonoBehaviour
             {
                 //CancelFinSight();
                 StartCoroutine(ReloadCoroutine());
-
             }
-                
         }
-       
-
-
     }
 
     //발사후 계산
@@ -108,7 +100,7 @@ public class GunController : MonoBehaviour
         //총기 반동 코루틴
         StopAllCoroutines();
         StartCoroutine(RetroActionCoroutine());
-
+        Debug.Log("총 발사함");
 
     }
 

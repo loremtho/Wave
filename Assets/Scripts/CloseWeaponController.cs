@@ -30,23 +30,23 @@ public abstract class CloseWeaponController : MonoBehaviour
     {
         if(!Inventory.inventoryActivated)
         {
-            if (Input.GetButton("Fire1"))
-        {
-            if (!isAttack)
-            {
-                if(CheckObject())
+            if (Input.GetButtonDown("Fire1"))
+            {   
+                if (!isAttack)
                 {
-                    if(currentCloseWeapon.isAxe && hitlnfo.transform.tag == "Tree")
+                    if(CheckObject())
                     {
-                        //StartCoroutine(thePlayerController.TreeLookCoroutine(hitlnfo.transform.GetComponent<Tree>().GetTreeCenterPosition()));
-                        StartCoroutine(AttackCoroutine("Chop", currentCloseWeapon.workDelayA, currentCloseWeapon.workDelayB, currentCloseWeapon.workDelay));
-                        return;
+                        if(currentCloseWeapon.isAxe && hitlnfo.transform.tag == "Tree")
+                        {
+                            //StartCoroutine(thePlayerController.TreeLookCoroutine(hitlnfo.transform.GetComponent<Tree>().GetTreeCenterPosition()));
+                            StartCoroutine(AttackCoroutine("Chop", currentCloseWeapon.workDelayA, currentCloseWeapon.workDelayB, currentCloseWeapon.workDelay));
+                            return;
+                        }
                     }
+                    //코루틴
+                    StartCoroutine(AttackCoroutine("Attack", currentCloseWeapon.attackDelayA, currentCloseWeapon.attackDelayB, currentCloseWeapon.attackDelay));
                 }
-                //코루틴
-                StartCoroutine(AttackCoroutine("Attack", currentCloseWeapon.attackDelayA, currentCloseWeapon.attackDelayB, currentCloseWeapon.attackDelay));
             }
-        }
         }
         
     }
