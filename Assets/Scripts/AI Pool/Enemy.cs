@@ -23,7 +23,9 @@ public class Enemy : MonoBehaviour
 
     public bool isChase;
 
-    private int hp;
+    [SerializeField]
+    private int Hp;
+
     private int currentHp;
 
 
@@ -52,8 +54,8 @@ public class Enemy : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
         ai = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
-        
-
+        currentHp = Hp;
+  
         Invoke("ChaseStart", 2);
 
     }
@@ -112,13 +114,23 @@ public class Enemy : MonoBehaviour
         
     }
 
-    IEnumerator OnDamage()
+
+     public void TakeDamage(int damage)
     {
+        currentHp -= damage;
 
-        //mat.color = Color.red;
+        // 체력이 0 이하로 떨어지면 몬스터를 파괴
+        if (currentHp <= 0)
+        {
+            Die();
+        }
 
-        yield return new WaitForSeconds(0.1f);
+        anim.SetTrigger("Hit");
+    }
 
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 
 

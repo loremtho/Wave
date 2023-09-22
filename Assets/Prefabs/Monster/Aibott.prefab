@@ -747,3 +747,5 @@ MonoBehaviour:
   meleeArea: {fileID: 355650733}
   isAttack: 0
   anim: {fileID: 7938431552718338803}
+  isChase: 0
+  Hp: 10

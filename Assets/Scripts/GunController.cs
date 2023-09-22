@@ -13,6 +13,8 @@ public class GunController : MonoBehaviour
     [SerializeField]
     private Gun currentGun;
 
+    private Enemy enemy; //몬스터 관리
+
     private float currentFireRate;
 
     //상태변수
@@ -122,8 +124,18 @@ public class GunController : MonoBehaviour
             Debug.DrawLine(BulletPos.position, hitlnfo.point, Color.red);
             TrailRenderer trail = Instantiate(BulletTrail, BulletPos.position, Quaternion.identity);
             StartCoroutine(SpawnTrail(trail, hitlnfo));
+
+            Enemy enemy = hitlnfo.collider.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(currentGun.damage);
+            }
+            
             var clone = Instantiate(hit_effect_prefab, hitlnfo.point, Quaternion.LookRotation(hitlnfo.normal));
+
             Destroy(clone, 1f);
+
+            
         }
     }
 
