@@ -5,7 +5,7 @@ using UnityEngine;
 public class AxeController : CloseWeaponController
 {
     //활성화여부
-    public static bool isActivate = false;
+    public static bool isActivate = true;
 
     private void Start()
     {
@@ -30,6 +30,10 @@ public class AxeController : CloseWeaponController
                 if(hitlnfo.transform.tag == "Rock")
                 {
                     hitlnfo.transform.GetComponent<Rock>().Mining();                   
+                }
+                else if(hitlnfo.transform.tag == "Battery")
+                {
+                    hitlnfo.transform.GetComponent<Battery>().Mining();
                 }
                 else if(hitlnfo.transform.tag == "Twig")
                 {

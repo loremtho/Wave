@@ -396,6 +396,8 @@ MonoBehaviour:
   originPos: {x: 0, y: 0, z: 0}
   theCam: {fileID: 223423289}
   hit_effect_prefab: {fileID: 4907882110527335544, guid: b9434b74dc1289348a73b813db617c22, type: 3}
+  BulletTrail: {fileID: 0}
+  BulletPos: {fileID: 0}
 --- !u!114 &1486368880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -806,6 +808,7 @@ MonoBehaviour:
   swimFastSpeed: 5
   upSwimSpeed: 2
   jumpForce: 4
+  aim: 1
   Playeranim: {fileID: 2306373748690370575}
   crouchPosY: 0
   lookSensitivity: 2
