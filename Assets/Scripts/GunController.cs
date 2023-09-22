@@ -98,7 +98,7 @@ public class GunController : MonoBehaviour
     private void Shoot()
     {
         theCrosshair.FireAnimation();
-        currentGun.currentBulletCount--;
+        //currentGun.currentBulletCount--; //장전 필요하면 추가 ㄱㄱ 일단 무한 탄창
         currentFireRate = currentGun.fireRate; //연사속도 재계산
         PlaySE(currentGun.fire_Sound);
         currentGun.muzzleFlash.Play();

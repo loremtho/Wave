@@ -87,24 +87,13 @@ public class GameManager : MonoBehaviour
             Enemy enemy = instantEnemy.GetComponent<Enemy>();
             enemy.target = player.transform;
             enemyList.RemoveAt(0);
-             yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(5);
         } 
+
+         StageEnd();
        
     }
 
-    /* 풀링 임시
-    protected virtual void Spawn()
-    {
-
-    }
-
-    public virtual void ReturnPool(Enemy clone)
-    {
-
-    }
-    */
-
-    // Update is called once per frame
     void Update()
     {
         if(isWater)
@@ -128,22 +117,7 @@ public class GameManager : MonoBehaviour
         if(isStop)
         return;
 
-        /* 풀링 임시
-        timer += Time.deltaTime;
-
-        if(timer > 0.1f)
-        {
-            timer = 0f;
-            count++;
-            Spawn();
-        }
-
-        if(count == 1000)
-        {
-            Time.timeScale = 0.05f;
-            isStop = true;
-        }
-        */ 
+   
     }
 
     void LateUpdate() 
