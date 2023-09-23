@@ -105,12 +105,12 @@ public class QuickSlotController : MonoBehaviour
             ChangeSlot(3);
         else if (Input.GetKeyDown(KeyCode.Alpha5))
             ChangeSlot(4);
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        /*else if (Input.GetKeyDown(KeyCode.Alpha6))
             ChangeSlot(5);
         else if (Input.GetKeyDown(KeyCode.Alpha7))
             ChangeSlot(6);
         else if (Input.GetKeyDown(KeyCode.Alpha8))
-            ChangeSlot(7);
+            ChangeSlot(7);*/
         }
     }
 
