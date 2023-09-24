@@ -65,7 +65,20 @@ public class PlayerController : MonoBehaviour
     private Crosshair theCrosshair;
     private StatusController theStatusController;
 
-    // Start is called before the first frame update
+    //인게임 UI
+    public int score = 0;
+
+    public void AddScore(int points)
+    {
+        score += points;
+    }
+
+
+    void Awake() 
+    {
+        PlayerPrefs.SetInt("MaxScore", 111111); //점수 기록 임시
+
+    }
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();

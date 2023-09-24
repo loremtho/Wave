@@ -23,13 +23,16 @@ public class Enemy : MonoBehaviour
 
     public bool isChase;
 
+    private PlayerController player;
+
+   
     [SerializeField]
     private int Hp;
 
     private int currentHp;
 
 
-      void FreezeVelocity()
+    void FreezeVelocity()
     {
         if(isChase)
         {
@@ -47,6 +50,12 @@ public class Enemy : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerController>();
+    }
+
+
 
     void Awake()
     {
@@ -54,6 +63,7 @@ public class Enemy : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
         ai = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
+       
         currentHp = Hp;
   
         Invoke("ChaseStart", 2);
@@ -127,12 +137,12 @@ public class Enemy : MonoBehaviour
 
         anim.SetTrigger("Hit");
     }
-
     private void Die()
     {
         Destroy(gameObject);
+        player.AddScore(20);
+       
     }
-
 
 
  

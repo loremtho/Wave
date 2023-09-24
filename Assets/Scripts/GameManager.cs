@@ -5,38 +5,46 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static bool isPause = false; // 메뉴가 호출되면 true; //변경
-    
-    public int stage;
 
-    public Text stageTxt;
+    //상태 변수
+    public static bool isPause = false; // 메뉴가 호출되면 true; //변경
+
     public bool isBattle;
+    public static bool isNight = false;
+    public static bool isWater = false;
+    private bool flag = false;
+
+    bool isStop;
+
+    //인게임 UI***********************
+    public int stage;
+    public Text stageTxt;
+    public Text maxScoreTxt;
+    public Text scoreTxt;
+    public float playTime;
+    public Text playTimeTxt;
+    public Text playerAmmoTxt;
+
+    float timer;
+    //********************************
+   
     public GameObject StartZone; //스테이지 게임 시작존 관리
 
-    public PlayerController player;
-
-    //몬스터 관리*********************************
+    //몬스터 관리***********************
     public Transform[] enemyZone; 
     public GameObject[] enemies;
     public List<int> enemyList;
 
-    //********************************
-
-
-    float timer;
-    bool isStop;
-
-    public static bool isNight = false;
-    public static bool isWater = false;
-
-
+    //*********************************
+    
+    //필요한 컴포넌트
+    public PlayerController player;
     private WeaponManager theWM;
-    private bool flag = false;
-
 
     void Awake()
     {
         enemyList = new List<int>();
+        maxScoreTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
 
     }
 
@@ -86,6 +94,7 @@ public class GameManager : MonoBehaviour
             GameObject instantEnemy = Instantiate(enemies[enemyList[0]], enemyZone[ranZone].position, enemyZone[ranZone].rotation);
             Enemy enemy = instantEnemy.GetComponent<Enemy>();
             enemy.target = player.transform;
+           
             enemyList.RemoveAt(0);
             yield return new WaitForSeconds(5);
         } 
@@ -114,15 +123,29 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(isStop)
+        if(isBattle)
+        {
+            playTime += Time.deltaTime;
+        }
+
+
         return;
 
    
     }
 
+
     void LateUpdate() 
     {
         stageTxt.text = "Wave " + stage + " / 5";
+
+        scoreTxt.text = string.Format("{0:n0}", player.score);
+
+        int hour = (int)(playTime / 3600);
+        int min = (int)((playTime - hour * 3600) /60);
+        int second = (int)(playTime % 60);
+        playTimeTxt.text = string.Format("{0 : 00}", hour) + ":" + string.Format("{0 : 00}", min) + ":" + string.Format("{0 : 00}", second);
+        
    
     }
 }
