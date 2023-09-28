@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public static class TransformExtensions
+public static class TransformExtensions //플레이어 자식 오브젝트 탐색 클래스
 {
     public static Transform FindDeepChild(this Transform parent, string name)
     {
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     private WeaponManager theWM;
 
-    public WeaponChanger weaponchanger;
+    public WeaponChanger weaponchanger; //무기 변경 스크립트
 
     void Awake()
     {
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         
         theWM = FindObjectOfType<WeaponManager>(); 
         
-        weaponchanger.GunA();
+        weaponchanger.GunA(); //플레이어 무기 타입 결정 임시
         
     }
 

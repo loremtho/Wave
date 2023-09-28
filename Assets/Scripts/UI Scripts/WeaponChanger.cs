@@ -6,26 +6,16 @@ public class WeaponChanger : MonoBehaviour
 {
     public PlayerController player;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void GunA()
     {
-        Transform playerAxe = player.transform.FindDeepChild("SciFi Assault");
-        if (playerAxe != null)
+        Transform playerWepon = player.transform.FindDeepChild("SciFi Assault");
+        if (playerWepon != null)
         {
-            GameObject AxeObject = playerAxe.gameObject;
-            if (!AxeObject.activeSelf)
+            GameObject WeponObject = playerWepon.gameObject;
+            if (!WeponObject.activeSelf)
             {
-                AxeObject.SetActive(true);
+                WeponObject.SetActive(true);
                 Debug.Log("SciFi Assault 오브젝트를 활성화했습니다.");
             }
             else
@@ -39,4 +29,6 @@ public class WeaponChanger : MonoBehaviour
         }
 
     }
+
+    
 }
