@@ -33,6 +33,9 @@ namespace Michsky.UI.Shift
 
         bool firstTime = true;
 
+        [SerializeField]
+        private GameObject Character;
+
         [System.Serializable]
         public class PanelItem
         {
@@ -120,7 +123,7 @@ namespace Michsky.UI.Shift
             }
         }
 
-        public void NextPage()
+        /*public void NextPage()
         {
             if (currentPanelIndex <= panels.Count - 2)
             {
@@ -176,7 +179,7 @@ namespace Michsky.UI.Shift
                 nextPanelAnimator.Play(panelFadeIn);
                 nextButtonAnimator.Play(buttonFadeIn);
             }
-        }
+        }*/
 
         IEnumerator DisablePreviousPanel()
         {
