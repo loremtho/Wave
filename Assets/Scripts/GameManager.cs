@@ -3,6 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+public static class TransformExtensions
+{
+    public static Transform FindDeepChild(this Transform parent, string name)
+    {
+        Transform result = parent.Find(name);
+        if (result != null)
+            return result;
+        foreach (Transform child in parent)
+        {
+            result = child.FindDeepChild(name);
+            if (result != null)
+                return result;
+        }
+        return null;
+    }
+}
+
 public class GameManager : MonoBehaviour
 {
 
@@ -41,6 +59,8 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     private WeaponManager theWM;
 
+    public WeaponChanger weaponchanger;
+
     void Awake()
     {
         enemyList = new List<int>();
@@ -52,6 +72,9 @@ public class GameManager : MonoBehaviour
     {
         
         theWM = FindObjectOfType<WeaponManager>(); 
+        
+        weaponchanger.GunA();
+        
     }
 
     public void StageStart() //스테이지 시작시 원하는 오브젝트 비활성화 
