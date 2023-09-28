@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     public float playTime;
     public Text playTimeTxt;
     public Text playerAmmoTxt;
+     public GameObject WeaponSelectionUI;
 
     float timer;
     //********************************
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
         
         theWM = FindObjectOfType<WeaponManager>(); 
         
-        weaponchanger.GunA(); //플레이어 무기 타입 결정 임시
+        //weaponchanger.GunA(); //플레이어 무기 타입 결정 임시
         
     }
 

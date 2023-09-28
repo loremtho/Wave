@@ -7,6 +7,8 @@ public class ButtonController : MonoBehaviour
 
     public GameObject ShopUI;
 
+    private WeaponChanger weaponchanger; //무기 변경 스크립트
+
     public GameObject WeaponSelectionUI;
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,19 @@ public class ButtonController : MonoBehaviour
     public void outWeaponSelect()
     {
         WeaponSelectionUI .SetActive(false);
+
+    }
+
+    public void SelectionGun()
+    {
+        weaponchanger.GunA();
+        WeaponSelectionUI.SetActive(false);
+    }
+
+       public void SelectionAxe()
+    {
+         weaponchanger.AxeA();
+         WeaponSelectionUI .SetActive(false);
 
     }
 }
