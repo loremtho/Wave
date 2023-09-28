@@ -20,6 +20,8 @@ public class AxeController : CloseWeaponController
             TryAttack();
         }
 
+        
+
     }
     protected override IEnumerator HitCoroutine()
     {
@@ -58,5 +60,19 @@ public class AxeController : CloseWeaponController
     {
         base.CloseWeaponChange(_closeWeapon);
         isActivate= true;
+    }
+
+
+       private void OnEnable()
+    {
+        // 활성화될 때 isActivate를 true로 변경
+        isActivate = true;
+    }
+
+    // 오브젝트가 비활성화될 때 호출되는 함수
+    private void OnDisable()
+    {
+        // 비활성화될 때 isActivate를 false로 변경
+        isActivate = false;
     }
 }

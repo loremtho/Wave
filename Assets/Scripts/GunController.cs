@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class GunController : MonoBehaviour
 {
     //활성화여부
-    public static bool isActivate= true;
+    public static bool isActivate= false;
 
     //현재 장착된 총
     [SerializeField]
@@ -47,6 +47,19 @@ public class GunController : MonoBehaviour
         //originPos = Vector3.zero;
         audioSource= GetComponent<AudioSource>();
         theCrosshair = FindObjectOfType<Crosshair>();
+    }
+
+    private void OnEnable()
+    {
+        // 활성화될 때 isActivate를 true로 변경
+        isActivate = true;
+    }
+
+    // 오브젝트가 비활성화될 때 호출되는 함수
+    private void OnDisable()
+    {
+        // 비활성화될 때 isActivate를 false로 변경
+        isActivate = false;
     }
 
     void Update()

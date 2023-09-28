@@ -43,6 +43,11 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]
     private AxeController theAxeController;
 
+    public void SetCurrentWeaponType(string weaponType) //무기 타입 변경
+    {
+        currentWeaponType = weaponType;
+    }
+
 
 
     // Start is called before the first frame update
