@@ -9,6 +9,9 @@ public class WeaponChanger : MonoBehaviour
     public GameObject WeaponSelectionUI;
 
     public WeaponManager theWM;
+
+    public GunController Gun;
+    public AxeController Axe;
     // Start is called before the first frame update
 
     public void GunA()
@@ -19,7 +22,8 @@ public class WeaponChanger : MonoBehaviour
             GameObject WeponObject = playerWepon.gameObject;
             if (!WeponObject.activeSelf)
             {
-                theWM.SetCurrentWeaponType("GUN");
+                Gun.GunMounting();
+                theWM.SetCurrentWeaponType("Rifle");
                 WeponObject.SetActive(true);
                 Debug.Log("SciFi Assault 오브젝트를 활성화했습니다.");
                 WeaponSelectionUI.SetActive(false);
@@ -44,6 +48,7 @@ public class WeaponChanger : MonoBehaviour
             GameObject WeponObject = playerWepon.gameObject;
             if (!WeponObject.activeSelf)
             {
+                Axe.AxeMounting();
                 theWM.SetCurrentWeaponType("AXE");
                 WeponObject.SetActive(true);
                 Debug.Log("Axe 오브젝트를 활성화했습니다.");

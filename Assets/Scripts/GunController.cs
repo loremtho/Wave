@@ -49,23 +49,16 @@ public class GunController : MonoBehaviour
         theCrosshair = FindObjectOfType<Crosshair>();
     }
 
-    private void OnEnable()
+    public void GunMounting()
     {
-        // 활성화될 때 isActivate를 true로 변경
-        isActivate = true;
+        isActivate= true;
     }
 
-    // 오브젝트가 비활성화될 때 호출되는 함수
-    private void OnDisable()
-    {
-        // 비활성화될 때 isActivate를 false로 변경
-        isActivate = false;
-    }
 
     void Update()
     {
 
-        if (isActivate)
+        if (isActivate == true)
         {
             GunFireRateCalc();
             TryFire();
