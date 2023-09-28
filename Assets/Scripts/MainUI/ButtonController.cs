@@ -6,6 +6,8 @@ public class ButtonController : MonoBehaviour
 {
 
     public GameObject ShopUI;
+
+    public GameObject WeaponSelectionUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,17 @@ public class ButtonController : MonoBehaviour
     public void outShop()
     {
         ShopUI .SetActive(false);
+
+    }
+
+       public void inWeaponSelect()
+    {
+        WeaponSelectionUI.SetActive(true);
+    }
+
+    public void outWeaponSelect()
+    {
+        WeaponSelectionUI .SetActive(false);
 
     }
 }
