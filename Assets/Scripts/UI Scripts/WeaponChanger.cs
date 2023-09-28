@@ -19,23 +19,23 @@ public class WeaponChanger : MonoBehaviour
 
     public void GunA()
     {
-        Transform playerAxe = player.transform.FindDeepChild("Axe");
+        Transform playerAxe = player.transform.FindDeepChild("SciFi Assault");
         if (playerAxe != null)
         {
             GameObject AxeObject = playerAxe.gameObject;
             if (!AxeObject.activeSelf)
             {
                 AxeObject.SetActive(true);
-                Debug.Log("Axe 오브젝트를 활성화했습니다.");
+                Debug.Log("SciFi Assault 오브젝트를 활성화했습니다.");
             }
             else
             {
-                Debug.Log("Axe 오브젝트는 이미 활성화되어 있습니다.");
+                Debug.Log("SciFi Assault 오브젝트는 이미 활성화되어 있습니다.");
             }
         } 
         else
         {
-            Debug.LogError("Axe 오브젝트를 찾을 수 없습니다.");
+            Debug.LogError("SciFi Assault 오브젝트를 찾을 수 없습니다.");
         }
 
     }
