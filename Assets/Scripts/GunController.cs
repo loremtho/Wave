@@ -125,30 +125,27 @@ public class GunController : MonoBehaviour
     //맞는 판정
     private void Hit()
     {
-        if(Physics.Raycast(theCam.transform.position, theCam.transform.forward + 
+    // 레이캐스트 방향 설정
+        Vector3 raycastDirection = theCam.transform.forward +
             new Vector3(Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
-                        Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
-                        0)
-            , out hitlnfo/*, currentGun.Range*/))
+                       Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
+                        0);
+
+        if (Physics.Raycast(theCam.transform.position, raycastDirection, out hitlnfo/*, currentGun.Range*/))
         {
             Debug.DrawLine(BulletPos.position, hitlnfo.point, Color.red);
-
+   
             Enemy enemy = hitlnfo.collider.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(currentGun.damage);
             }
-            
-            var clone = Instantiate(hit_effect_prefab, hitlnfo.point, Quaternion.LookRotation(hitlnfo.normal));
 
+            var clone = Instantiate(hit_effect_prefab, hitlnfo.point, Quaternion.LookRotation(hitlnfo.normal));
             Destroy(clone, 1f);
 
-            Vector3 bulletDirection = theCam.transform.forward; //투사체 새로한것
-            bulletDirection += new Vector3(
-            Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
-            Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
-             0 );
-            FireBullet(bulletDirection);
+            // 방향을 수정하지 않고 그대로 사용
+            FireBullet(raycastDirection);
         }
     }
 
@@ -158,7 +155,28 @@ public class GunController : MonoBehaviour
         Rigidbody rd = Instantiate(Bullet, bulletSpawnPosition, transform.rotation);
         rd.velocity = shootDirection.normalized * BulletSpeed;
         Destroy(rd.gameObject, 1.0f);
+
     }
+
+
+
+
+    private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    {
+        float time = 0;
+        Vector3 startPos = BulletTrail.transform.position;
+
+        while(time < 1)
+        {
+            BulletTrail.transform.position = Vector3.Lerp(startPos, hit.point, time);
+            time += Time.deltaTime / trail.time;
+
+            yield return null;
+        }
+        trail.transform.position = hit.point;
+        Destroy(trail.gameObject, trail.time);
+    }
+
     private void TryReload()
     {
         if(Input.GetKeyDown(KeyCode.R) && !isReload && currentGun.currentBulletCount < currentGun.reloadBulletCount)
