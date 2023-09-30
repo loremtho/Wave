@@ -125,37 +125,28 @@ public class GunController : MonoBehaviour
     //맞는 판정
     private void Hit()
     {
-        if(Physics.Raycast(theCam.transform.position, theCam.transform.forward + 
+    // 레이캐스트 방향 설정
+        Vector3 raycastDirection = theCam.transform.forward +
             new Vector3(Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
-                        Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
-                        0)
-            , out hitlnfo/*, currentGun.Range*/))
+                       Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
+                        0);
+
+        if (Physics.Raycast(theCam.transform.position, raycastDirection, out hitlnfo/*, currentGun.Range*/))
         {
             Debug.DrawLine(BulletPos.position, hitlnfo.point, Color.red);
-            //TrailRenderer trail = Instantiate(BulletTrail, BulletPos.position, Quaternion.identity);
-            //StartCoroutine(SpawnTrail(trail, hitlnfo));
-
+   
             Enemy enemy = hitlnfo.collider.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(currentGun.damage);
             }
-            
-            var clone = Instantiate(hit_effect_prefab, hitlnfo.point, Quaternion.LookRotation(hitlnfo.normal));
 
+            var clone = Instantiate(hit_effect_prefab, hitlnfo.point, Quaternion.LookRotation(hitlnfo.normal));
             Destroy(clone, 1f);
 
-            Vector3 bulletDirection = theCam.transform.forward; //투사체 새로한것
-            bulletDirection += new Vector3(
-            Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
-            Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
-             0 );
-            FireBullet(bulletDirection);
-
-            
+            // 방향을 수정하지 않고 그대로 사용
+            FireBullet(raycastDirection);
         }
-
-
     }
 
     private void FireBullet(Vector3 shootDirection)   //투사체 새로 한것
