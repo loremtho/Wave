@@ -16,10 +16,10 @@ public class WeaponChanger : MonoBehaviour
 
     public void GunA()
     {
-        Transform playerWepon = player.transform.FindDeepChild("SciFi Assault");
-        if (playerWepon != null)
+        Transform playerWeapon = player.transform.FindDeepChild("SciFi Assault");
+        if (playerWeapon != null)
         {
-            GameObject WeponObject = playerWepon.gameObject;
+            GameObject WeponObject = playerWeapon.gameObject;
             if (!WeponObject.activeSelf)
             {
                 Gun.GunMounting();
@@ -42,15 +42,15 @@ public class WeaponChanger : MonoBehaviour
 
     public void AxeA()
     {
-        Transform playerWepon = player.transform.FindDeepChild("Axe");
-        if (playerWepon != null)
+        Transform playerWeapon = player.transform.FindDeepChild("Axe");
+        if (playerWeapon != null)
         {
-            GameObject WeponObject = playerWepon.gameObject;
-            if (!WeponObject.activeSelf)
+            GameObject WeaponObject = playerWeapon.gameObject;
+            if (!WeaponObject.activeSelf)
             {
                 Axe.AxeMounting();
                 theWM.SetCurrentWeaponType("AXE");
-                WeponObject.SetActive(true);
+                WeaponObject.SetActive(true);
                 Debug.Log("Axe 오브젝트를 활성화했습니다.");
                 WeaponSelectionUI.SetActive(false);
             }

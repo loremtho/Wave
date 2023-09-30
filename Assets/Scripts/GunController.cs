@@ -132,8 +132,6 @@ public class GunController : MonoBehaviour
             , out hitlnfo/*, currentGun.Range*/))
         {
             Debug.DrawLine(BulletPos.position, hitlnfo.point, Color.red);
-            //TrailRenderer trail = Instantiate(BulletTrail, BulletPos.position, Quaternion.identity);
-            //StartCoroutine(SpawnTrail(trail, hitlnfo));
 
             Enemy enemy = hitlnfo.collider.gameObject.GetComponent<Enemy>();
             if (enemy != null)
@@ -151,11 +149,7 @@ public class GunController : MonoBehaviour
             Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
              0 );
             FireBullet(bulletDirection);
-
-            
         }
-
-
     }
 
     private void FireBullet(Vector3 shootDirection)   //투사체 새로 한것
@@ -164,28 +158,7 @@ public class GunController : MonoBehaviour
         Rigidbody rd = Instantiate(Bullet, bulletSpawnPosition, transform.rotation);
         rd.velocity = shootDirection.normalized * BulletSpeed;
         Destroy(rd.gameObject, 1.0f);
-
     }
-
-
-
-
-    private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
-    {
-        float time = 0;
-        Vector3 startPos = BulletTrail.transform.position;
-
-        while(time < 1)
-        {
-            BulletTrail.transform.position = Vector3.Lerp(startPos, hit.point, time);
-            time += Time.deltaTime / trail.time;
-
-            yield return null;
-        }
-        trail.transform.position = hit.point;
-        Destroy(trail.gameObject, trail.time);
-    }
-
     private void TryReload()
     {
         if(Input.GetKeyDown(KeyCode.R) && !isReload && currentGun.currentBulletCount < currentGun.reloadBulletCount)
