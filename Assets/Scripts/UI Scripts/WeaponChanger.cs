@@ -12,19 +12,20 @@ public class WeaponChanger : MonoBehaviour
 
     public GunController Gun;
     public AxeController Axe;
+
     // Start is called before the first frame update
 
     public void GunA()
     {
-        Transform playerWepon = player.transform.FindDeepChild("SciFi Assault");
-        if (playerWepon != null)
+        Transform playerWeapon = player.transform.FindDeepChild("SciFi Assault");
+        if (playerWeapon != null)
         {
-            GameObject WeponObject = playerWepon.gameObject;
-            if (!WeponObject.activeSelf)
+            GameObject WeaponObject = playerWeapon.gameObject;
+            if (!WeaponObject.activeSelf)
             {
                 Gun.GunMounting();
                 theWM.SetCurrentWeaponType("Rifle");
-                WeponObject.SetActive(true);
+                WeaponObject.SetActive(true);
                 Debug.Log("SciFi Assault 오브젝트를 활성화했습니다.");
                 WeaponSelectionUI.SetActive(false);
             }
@@ -42,15 +43,15 @@ public class WeaponChanger : MonoBehaviour
 
     public void AxeA()
     {
-        Transform playerWepon = player.transform.FindDeepChild("Axe");
-        if (playerWepon != null)
+        Transform playerWeapon = player.transform.FindDeepChild("Axe");
+        if (playerWeapon != null)
         {
-            GameObject WeponObject = playerWepon.gameObject;
-            if (!WeponObject.activeSelf)
+            GameObject WeaponObject = playerWeapon.gameObject;
+            if (!WeaponObject.activeSelf)
             {
                 Axe.AxeMounting();
                 theWM.SetCurrentWeaponType("AXE");
-                WeponObject.SetActive(true);
+                WeaponObject.SetActive(true);
                 Debug.Log("Axe 오브젝트를 활성화했습니다.");
                 WeaponSelectionUI.SetActive(false);
             }

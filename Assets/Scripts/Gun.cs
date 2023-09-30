@@ -13,9 +13,9 @@ public class Gun : MonoBehaviour
 
     public int damage;
 
-    public int reloadBulletCount; //������ ����
-    public int currentBulletCount; //źâ
-    public int maxBulletCount; //�ִ� ����
+    public int reloadBulletCount; 
+    public int currentBulletCount; 
+    public int maxBulletCount; 
     public int carryBulletCount; 
 
     public float retroActionForce;
@@ -24,6 +24,7 @@ public class Gun : MonoBehaviour
     public Vector3 fineSightOriginPos;
     public Animator anim;
     public ParticleSystem muzzleFlash;
+    public ParticleSystem ConnectVFX;
 
     public AudioClip fire_Sound;
 
