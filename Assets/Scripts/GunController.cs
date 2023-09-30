@@ -41,6 +41,9 @@ public class GunController : MonoBehaviour
     [SerializeField]
     private Transform BulletPos;
 
+    public Rigidbody Bullet;
+    public float BulletSpeed;
+
     // Update is called once per frame
     private void Start()
     {
@@ -108,6 +111,7 @@ public class GunController : MonoBehaviour
         currentFireRate = currentGun.fireRate; //연사속도 재계산
         PlaySE(currentGun.fire_Sound);
         currentGun.muzzleFlash.Play();
+    
 
         Hit(); //다르게 할거면 오브젝트 폴링 쓰기
         //총기 반동 코루틴
@@ -128,8 +132,8 @@ public class GunController : MonoBehaviour
             , out hitlnfo/*, currentGun.Range*/))
         {
             Debug.DrawLine(BulletPos.position, hitlnfo.point, Color.red);
-            TrailRenderer trail = Instantiate(BulletTrail, BulletPos.position, Quaternion.identity);
-            StartCoroutine(SpawnTrail(trail, hitlnfo));
+            //TrailRenderer trail = Instantiate(BulletTrail, BulletPos.position, Quaternion.identity);
+            //StartCoroutine(SpawnTrail(trail, hitlnfo));
 
             Enemy enemy = hitlnfo.collider.gameObject.GetComponent<Enemy>();
             if (enemy != null)
@@ -141,9 +145,30 @@ public class GunController : MonoBehaviour
 
             Destroy(clone, 1f);
 
+            Vector3 bulletDirection = theCam.transform.forward; //투사체 새로한것
+            bulletDirection += new Vector3(
+            Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
+            Random.Range(-theCrosshair.GetAccuracy() - currentGun.accuracy, theCrosshair.GetAccuracy() + currentGun.accuracy),
+             0 );
+            FireBullet(bulletDirection);
+
             
         }
+
+
     }
+
+    private void FireBullet(Vector3 shootDirection)   //투사체 새로 한것
+    {
+        Vector3 bulletSpawnPosition = BulletPos.position;
+        Rigidbody rd = Instantiate(Bullet, bulletSpawnPosition, transform.rotation);
+        rd.velocity = shootDirection.normalized * BulletSpeed;
+        Destroy(rd.gameObject, 1.0f);
+
+    }
+
+
+
 
     private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
     {
