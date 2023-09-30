@@ -458,11 +458,11 @@ MonoBehaviour:
   isFIneSightMode: 0
   originPos: {x: 0, y: 0.25, z: 1}
   theCam: {fileID: 223423289}
-  hit_effect_prefab: {fileID: 4907882110527335544, guid: b9434b74dc1289348a73b813db617c22, type: 3}
+  hit_effect_prefab: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
   BulletTrail: {fileID: 6976449853662069777, guid: 23094b07edddcad4fb7e484ce1e3fec8, type: 3}
   BulletPos: {fileID: 1126240784}
   Bullet: {fileID: 6123797597664513275, guid: 23094b07edddcad4fb7e484ce1e3fec8, type: 3}
-  BulletSpeed: 30
+  BulletSpeed: 200
 --- !u!114 &1486368880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,7 +611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   limitPos: {x: 0.18, y: 0.1, z: 0}
   fineSightLimotPos: {x: 0.005, y: 0.005, z: 0}
-  smoothSway: {x: 0.05, y: 0.03, z: 0}
+  smoothSway: {x: 0.02, y: 0.015, z: 0}
   theGunController: {fileID: 1486368881}
 --- !u!1 &1515561446
 GameObject:
@@ -926,7 +926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1440372957307757124, guid: 8ed5e46e60030a14fab6d36bba94ceda, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1780869355716229374, guid: 8ed5e46e60030a14fab6d36bba94ceda, type: 3}
       propertyPath: m_RootOrder
@@ -996,6 +996,10 @@ PrefabInstance:
       propertyPath: damage
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5894107323951746038, guid: 8ed5e46e60030a14fab6d36bba94ceda, type: 3}
+      propertyPath: ConnectVFX
+      value: 
+      objectReference: {fileID: 6677916553650389248, guid: 2efa44df15e2c684fbab54c8b447b3fe, type: 3}
     - target: {fileID: 5894107323951746038, guid: 8ed5e46e60030a14fab6d36bba94ceda, type: 3}
       propertyPath: muzzleFlash
       value: 

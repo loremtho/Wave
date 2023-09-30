@@ -10,7 +10,7 @@ public class ActionController : MonoBehaviour
 
     private bool pickupActivated = false; //아이템 습득 가능할 시 True
 
-    private bool lookComputer = false; //컴퓨터를 바라볼 경우 true
+    //private bool lookComputer = false; //컴퓨터를 바라볼 경우 true
 
     private bool lookActivatedTrap = false; // 가동된 함정을 바로볼시 true
 
@@ -113,7 +113,7 @@ public class ActionController : MonoBehaviour
     private void lnfoDisappear()
     {
         pickupActivated = false;
-        lookComputer = false;
+        //lookComputer = false;
         actionText.gameObject.SetActive(false);
     }
 }

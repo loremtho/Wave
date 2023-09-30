@@ -24,7 +24,6 @@ public class Gun : MonoBehaviour
     public Vector3 fineSightOriginPos;
     public Animator anim;
     public ParticleSystem muzzleFlash;
-    public ParticleSystem ConnectVFX;
 
     public AudioClip fire_Sound;
 
