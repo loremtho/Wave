@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public static class TransformExtensions //플레이어 자식 오브젝트 탐색 클래스
 {
+    
     public static Transform FindDeepChild(this Transform parent, string name)
     {
         Transform result = parent.Find(name);
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
     public float playTime;
     public Text playTimeTxt;
     public Text playerAmmoTxt;
-     public GameObject WeaponSelectionUI;
+
 
     float timer;
     //********************************
