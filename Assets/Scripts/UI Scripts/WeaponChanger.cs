@@ -14,7 +14,7 @@ public class WeaponChanger : MonoBehaviour
     public AxeController Axe;
 
     // Start is called before the first frame update
-
+    
     public void GunA()
     {
         Transform playerWeapon = player.transform.FindDeepChild("SciFi Assault");
@@ -28,6 +28,8 @@ public class WeaponChanger : MonoBehaviour
                 WeaponObject.SetActive(true);
                 Debug.Log("SciFi Assault 오브젝트를 활성화했습니다.");
                 WeaponSelectionUI.SetActive(false);
+                
+              
             }
             else
             {
