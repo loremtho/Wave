@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     Rigidbody rigid;
     BoxCollider boxCollider;
 
+    public ParticleSystem muzzleFlashs;
+
     public BoxCollider meleeArea;
 
     public bool isAttack;
@@ -133,9 +135,13 @@ public class Enemy : MonoBehaviour
         if (currentHp <= 0)
         {
             Die();
+            muzzleFlashs.Play();
+            
+
         }
 
         anim.SetTrigger("Hit");
+        muzzleFlashs.Play();
     }
     private void Die()
     {
