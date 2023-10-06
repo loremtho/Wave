@@ -86,11 +86,6 @@ public class PlayerController : MonoBehaviour
     }
     
 
-    void Awake() 
-    {
-        PlayerPrefs.SetInt("MaxScore", 111111); //점수 기록 임시
-
-    }
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();

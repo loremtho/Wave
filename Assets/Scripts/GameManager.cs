@@ -27,26 +27,29 @@ public class GameManager : MonoBehaviour
 
     //상태 변수
     public static bool isPause = false; // 메뉴가 호출되면 true; //변경
-
     public bool isBattle;
     public static bool isNight = false;
     public static bool isWater = false;
     private bool flag = false;
-
     bool isStop;
 
     //인게임 UI***********************
     public int stage;
     public Text stageTxt;
-    public Text maxScoreTxt;
     public Text scoreTxt;
-    public float playTime;
     public Text playTimeTxt;
-    public Text playerAmmoTxt;
     public Text hitscoreTxt;
     public Text killcountTxt;
-
+    public float playTime;
     float timer;
+    //클리어 캔버스 UI*****************
+
+    public Text LastscoreTxt;
+    public Text LastplayTimeTxt;
+    public Text LasthitscoreTxt;
+    public Text LastkillcountTxt;
+    public float LastplayTime;
+
     //********************************
    
     public GameObject StartZone; //스테이지 게임 시작존 관리
@@ -67,8 +70,6 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         enemyList = new List<int>();
-        maxScoreTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
-
     }
 
 
@@ -166,17 +167,26 @@ public class GameManager : MonoBehaviour
     {
         stageTxt.text = "Wave " + stage + " / 5";
 
-        scoreTxt.text = string.Format("{0:n0}",player.score);
+        scoreTxt.text = string.Format("Score : {0:n0}",player.score);
 
-        hitscoreTxt.text = string.Format("{0:n0}",player.hitscore);
+        hitscoreTxt.text = string.Format("Hit : {0:n0}",player.hitscore);
 
-        killcountTxt.text = string.Format("{0:n0}",player.killcount);
+        killcountTxt.text = string.Format("Kill : {0:n0}",player.killcount);
 
         int hour = (int)(playTime / 3600);
         int min = (int)((playTime - hour * 3600) /60);
         int second = (int)(playTime % 60);
         playTimeTxt.text = string.Format("{0 : 00}", hour) + ":" + string.Format("{0 : 00}", min) + ":" + string.Format("{0 : 00}", second);
-        
    
+    }
+
+    void LastUi() //클리어시 출력 클리어 UI
+    {
+         LastscoreTxt.text = string.Format("Score : {0:n0}",player.score);
+
+        LasthitscoreTxt.text = string.Format("Hit : {0:n0}",player.hitscore);
+
+        LastkillcountTxt.text = string.Format("Kill : {0:n0}",player.killcount);
+
     }
 }
