@@ -65,14 +65,26 @@ public class PlayerController : MonoBehaviour
     private Crosshair theCrosshair;
     private StatusController theStatusController;
 
-    //인게임 UI
+    
     public int score = 0;
+    public int hitscore = 0;
+    public int killcount = 0;
 
-    public void AddScore(int points)
+    public void AddScore(int points) //플레이어 점수 추가
     {
         score += points;
     }
 
+    public void AddHitScore(int points) //플레이어 점수 추가
+    {
+        hitscore += points;
+    }
+    
+       public void AddKillcount(int points) //플레이어 점수 추가
+    {
+        killcount += points;
+    }
+    
 
     void Awake() 
     {

@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour
 
     private PlayerController player;
 
+    private GameManager gameManager;
+
    
     [SerializeField]
     private int Hp;
@@ -130,12 +132,13 @@ public class Enemy : MonoBehaviour
      public void TakeDamage(int damage)
     {
         currentHp -= damage;
+         player.AddHitScore(20);
 
         // 체력이 0 이하로 떨어지면 몬스터를 파괴
         if (currentHp <= 0)
         {
             Die();
-            muzzleFlashs.Play();
+            
             
 
         }
@@ -147,6 +150,7 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
         player.AddScore(20);
+        player.AddKillcount(1);
        
     }
 

@@ -43,7 +43,8 @@ public class GameManager : MonoBehaviour
     public float playTime;
     public Text playTimeTxt;
     public Text playerAmmoTxt;
-
+    public Text hitscoreTxt;
+    public Text killcountTxt;
 
     float timer;
     //********************************
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
         maxScoreTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
 
     }
+
 
     void Start()
     {
@@ -164,7 +166,11 @@ public class GameManager : MonoBehaviour
     {
         stageTxt.text = "Wave " + stage + " / 5";
 
-        scoreTxt.text = string.Format("{0:n0}", player.score);
+        scoreTxt.text = string.Format("{0:n0}",player.score);
+
+        hitscoreTxt.text = string.Format("{0:n0}",player.hitscore);
+
+        killcountTxt.text = string.Format("{0:n0}",player.killcount);
 
         int hour = (int)(playTime / 3600);
         int min = (int)((playTime - hour * 3600) /60);

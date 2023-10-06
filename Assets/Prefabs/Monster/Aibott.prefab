@@ -745,6 +745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  muzzleFlashs: {fileID: 7691587065232879606}
   meleeArea: {fileID: 355650733}
   isAttack: 0
   anim: {fileID: 7938431552718338803}
@@ -763,7 +764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1765910852458632, guid: edeef16185a45a04d9e821abf5db7846, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4488759651114942, guid: edeef16185a45a04d9e821abf5db7846, type: 3}
       propertyPath: m_RootOrder
@@ -810,13 +811,26 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198135044542006308, guid: edeef16185a45a04d9e821abf5db7846, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198135044542006308, guid: edeef16185a45a04d9e821abf5db7846, type: 3}
       propertyPath: ShapeModule.type
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 198135044542006308, guid: edeef16185a45a04d9e821abf5db7846, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edeef16185a45a04d9e821abf5db7846, type: 3}
 --- !u!4 &7497958922988745836 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4488759651114942, guid: edeef16185a45a04d9e821abf5db7846, type: 3}
+  m_PrefabInstance: {fileID: 7494530099401354194}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7691587065232879606 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198135044542006308, guid: edeef16185a45a04d9e821abf5db7846, type: 3}
   m_PrefabInstance: {fileID: 7494530099401354194}
   m_PrefabAsset: {fileID: 0}
