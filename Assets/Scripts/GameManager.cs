@@ -180,7 +180,7 @@ public class GameManager : MonoBehaviour
    
     }
 
-    void LastUi() //클리어시 출력 클리어 UI
+    public void LastUi() //클리어시 출력 클리어 UI
     {
          LastscoreTxt.text = string.Format("Score : {0:n0}",player.score);
 
