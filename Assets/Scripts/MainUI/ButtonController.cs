@@ -23,7 +23,15 @@ public class ButtonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+             inWeaponSelect();
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            inEnding();
+        }
     }
 
     public void inShop()
@@ -37,7 +45,7 @@ public class ButtonController : MonoBehaviour
 
     }
 
-       public void inWeaponSelect()
+    public void inWeaponSelect()
     {
         WeaponSelectionUI.SetActive(true);
     }

@@ -45,6 +45,8 @@ public class PlayerShooter : MonoBehaviour
         gunPivot.position = rightHandMount.position;
         //Vector3 offset = new Vector3(-0.1f, -0.13f, 0.3f); // 원하는 내리기 위치 (여기서는 -0.1f만큼 아래로 이동)
         //gunPivot.position += offset;
+
+        
         
         
 
