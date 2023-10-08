@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonController : MonoBehaviour
 {
@@ -80,6 +81,16 @@ public class ButtonController : MonoBehaviour
     {
         EndingUI.SetActive(false);
 
+    }
+
+    public void HomeBtn()
+    {
+        SceneManager.LoadScene("Testmain");
+    }
+
+    public void RestartBtn()
+    {
+        SceneManager.LoadScene("TestScene");
     }
     
 }
