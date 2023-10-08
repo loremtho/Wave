@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,12 +59,18 @@ public class GameManager : MonoBehaviour
     public Transform[] enemyZone; 
     public GameObject[] enemies;
     public List<int> enemyList;
+    //배터리 스폰 관리*******************
+
+    public GameObject Battery_prefab;
+    public Transform[] battery_trans;
+    private List<GameObject> Battery_prefab_Ins = new List<GameObject>();
 
     //*********************************
     
     //필요한 컴포넌트
     public PlayerController player;
     private WeaponManager theWM;
+    public BaseCamp baseCamp;
 
     public WeaponChanger weaponchanger; //무기 변경 스크립트
 
@@ -88,8 +95,7 @@ public class GameManager : MonoBehaviour
 
         foreach(Transform zone in enemyZone) //게임 시작시 스폰 활성
         zone.gameObject.SetActive(true);
-
-
+        BatteryRespawner(); // 게임 시작시 배터리 스폰시킴
         isBattle = true;
         StartCoroutine(InBattle());
 
@@ -103,7 +109,11 @@ public class GameManager : MonoBehaviour
 
         foreach(Transform zone in enemyZone) //게임 시작시 스폰 비활성
         zone.gameObject.SetActive(false);
-
+        foreach(var prefabInstance in Battery_prefab_Ins) // 스테이지 종료 시 생성한 배터리 프리펩 전부 파괴
+        {
+            Destroy(prefabInstance);
+        }
+        Battery_prefab_Ins.Clear(); // 리스트 비워서 중복 파괴 방지
         isBattle = false;
         stage++;
 
@@ -188,5 +198,24 @@ public class GameManager : MonoBehaviour
 
         LastkillcountTxt.text = string.Format("Kill : {0:n0}",player.killcount);
 
+    }
+
+    private void BatteryRespawner() //배터리 프리팹을 스폰시킴
+    {
+        int allSpawnPoint = battery_trans.Length;
+        int BeSpawned = 0;
+        for(int index = 0; index < stage; index++) //스테이지 마다 스폰시킴
+        {
+            foreach (Transform spawnPoint in battery_trans) //배열로 선언된 위치에 스폰함
+            {
+                var prefabInstance = Instantiate(Battery_prefab, spawnPoint.position, spawnPoint.rotation);
+                Battery_prefab_Ins.Add(prefabInstance);
+                BeSpawned++;
+                if(BeSpawned >= allSpawnPoint)
+                {
+                    return;
+                }
+            }
+        }
     }
 }

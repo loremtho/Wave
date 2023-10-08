@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Battery : MonoBehaviour
@@ -12,6 +13,8 @@ public class Battery : MonoBehaviour
 
     [SerializeField]
     private CapsuleCollider col; //구체 콜라이더
+
+    public float healingAmount = 20f;
 
 
 //필요한 게임 오브젝트
@@ -32,7 +35,11 @@ public class Battery : MonoBehaviour
     private string strike_Sound;
     [SerializeField]
     private string destroy_Sound;
+    private GameManager gameManager;
 
+    private void Start() {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     public void Mining()
     {
@@ -63,4 +70,5 @@ public class Battery : MonoBehaviour
         //go_debris.SetActive(true);
         //Destroy(go_debris, destroyTime);
     }
+
 }

@@ -95,14 +95,12 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         {
             if(item != null)
             {
-              
                 theItemEffectDatabase.UseItem(item);
 
                 if(item.itemType == Item.ItemType.Used)
                 {
                     SetSlotCount(-1);
                 }
-       
             }
         }
     }

@@ -25,7 +25,7 @@ public class Item : ScriptableObject
         Used,
         Ingredient,
         Kit,
-        ETC 
+        ETC,
     }
 
 

@@ -26,8 +26,10 @@ public class ItemEffectDatabase : MonoBehaviour
     private SlotToolTip theSlotToolTip;
     [SerializeField]
     private QuickSlotController theQuickSlotController;
+    [SerializeField]
+    private BaseCamp baseCamp;
 
-    private const string HP = "HP", SP = "SP", DP = "DP", HUNGRY = "HUNGRY", THIRSTY = "THIRSTY", SATISFY = "SATISFY";
+    private const string HP = "HP", SP = "SP", DP = "DP", Battery = "Battery";
 
     //QuickSlotController 징검다리
     public void IsActivatedQuickSlot(int _num)
@@ -72,16 +74,11 @@ public class ItemEffectDatabase : MonoBehaviour
                             case "DP":
                                 thePlayerStatus.IncreaseDP(itemEffects[x].num[y]);
                                 break;
-                            /*case "HUNGRY":
-                                thePlayerStatus.IncreaseHungry(itemEffects[x].num[y]);
+                            case "Battery":
+                                baseCamp.Heal(itemEffects[x].num[y]);
                                 break;
-                            case "THIRSTY":
-                                thePlayerStatus.IncreaseThirsty(itemEffects[x].num[y]);
-                                break;
-                            case "SATISFY":
-                                break;*/
                             default:
-                                Debug.Log("잘못된 Status 부위.HP, SP,  DP, HUNGRY, THIRSTY, SATISFY 만 가능합니다. ");
+                                Debug.Log("잘못된 Status 부위.HP, SP,  DP 만 가능합니다. ");
                                 break;
 
                         }
