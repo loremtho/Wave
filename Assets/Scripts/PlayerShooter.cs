@@ -41,13 +41,12 @@ public class PlayerShooter : MonoBehaviour
 
     private void OnAnimatorIK(int layerIndex) 
     {
-        //총의 기준점 gunPivot을 3D 모델의 오른쪽 팔꿈치 위치로 이동
-
+        
         gunPivot.position = rightHandMount.position;
-        //gunPivot.position = playerAnimator.GetIKHintPosition(AvatarIKHint.RightElbow);
-
-        Vector3 offset = new Vector3(-0.1f, -0.13f, 0.3f); // 원하는 내리기 위치 (여기서는 -0.1f만큼 아래로 이동)
-        gunPivot.position += offset;
+        //Vector3 offset = new Vector3(-0.1f, -0.13f, 0.3f); // 원하는 내리기 위치 (여기서는 -0.1f만큼 아래로 이동)
+        //gunPivot.position += offset;
+        
+        
 
         //IK를 사용하여 왼속의 위치와 회전을 왼쪽 손잡이에 맞춤
         

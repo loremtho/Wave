@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+     public Transform gunPivot; //총 배치의 기준점
+    //public Transform rightHandMount;  //오른손 위치
     //스피드 조정
     [SerializeField]    
     private float walkSpeed;
@@ -320,6 +322,9 @@ public class PlayerController : MonoBehaviour
         currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
 
         theCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
+
+        gunPivot.rotation = Quaternion.Euler(currentCameraRotationX, transform.eulerAngles.y, 0f);
+        //gunPivot.position = rightHandMount.position;
     }
 
     
