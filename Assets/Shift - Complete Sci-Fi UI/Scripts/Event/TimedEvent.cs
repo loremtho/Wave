@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Michsky.UI.Shift
 {
@@ -26,6 +27,18 @@ namespace Michsky.UI.Shift
         {
             yield return new WaitForSeconds(timer);
             timerAction.Invoke();
+
+            //SceneManager.LoadScene("TestScene");
+
+        }
+
+         IEnumerator TimedEventStart2()
+        {
+            yield return new WaitForSeconds(timer);
+            timerAction.Invoke();
+
+            SceneManager.LoadScene("TestScene");
+
         }
 
         public void StartIEnumerator ()

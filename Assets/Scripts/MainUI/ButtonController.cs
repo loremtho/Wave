@@ -35,6 +35,11 @@ public class ButtonController : MonoBehaviour
         }
     }
 
+    public void inGame()
+    {
+        SceneManager.LoadScene("TestScene");
+    }
+
     public void inShop()
     {
         ShopUI.SetActive(true);
