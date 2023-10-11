@@ -32,8 +32,13 @@ public class PlayerController : MonoBehaviour
     private bool isCrouch = false;
     private bool isGround = true;
     public bool aim = true;
-   
 
+    private bool isInGunMode = false;
+
+    private bool isDefaultmode = true;
+
+    private bool playergun = false;
+   
     //움직임 체크 변수
     private Vector3 lastPos;
     
@@ -67,7 +72,11 @@ public class PlayerController : MonoBehaviour
     private Crosshair theCrosshair;
     private StatusController theStatusController;
 
-    
+    private WeaponChanger weaponChanger;
+
+
+    public GameObject gunObject; //총 활성화 확인
+
     public int score = 0;
     public int hitscore = 0;
     public int killcount = 0;
@@ -130,7 +139,59 @@ public class PlayerController : MonoBehaviour
             CharacterRotation();
         }
         MoveCheck();
+
+        if (gunObject.activeSelf)
+        {
+            // 오브젝트가 활성화되면 GunMode로 변경
+            SetGunMode(true);
+            playergun = true;
+        }
+        else
+        {
+            SetDefaultMode(true);
+            SetGunMode(false);
+        }
+
     }
+
+    private void SetGunMode(bool enableGunMode)  //총모드
+    {
+        isInGunMode = enableGunMode;
+
+
+        if (isInGunMode)
+        {
+            Debug.Log("플레이어가 GunMode로 변경됨");
+            Playeranim.SetBool("Gunmode", true);
+            Playeranim.SetBool("Idle", false);
+         
+        }
+        else
+        {
+            Debug.Log("플레이어가 기본 상태로 변경됨");
+            Playeranim.SetBool("Gunmode", false);
+           
+        }
+    }
+
+    private void SetDefaultMode(bool enableDefaultMode) //기본 모드
+    {
+        isDefaultmode = enableDefaultMode;
+
+
+        if (isDefaultmode)
+        {
+            Playeranim.SetBool("Idle", true);
+         
+        }
+        else
+        {
+            
+           
+        }
+    }
+
+    
 
     private void WaterCheck()
     {
@@ -159,12 +220,12 @@ public class PlayerController : MonoBehaviour
         if (isCrouch)
         {
             applySpeed = crouchSpeed;
-            applyCrouchPosY = crouchPosY;
+            //applyCrouchPosY = crouchPosY;
         }
         else
         {
             applySpeed = walkSpeed;
-            applyCrouchPosY = originPosY;
+            //applyCrouchPosY = originPosY;
         }
 
         StartCoroutine(CrouchCoroutine());
@@ -194,17 +255,28 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftShift) && theStatusController.GetCurrentSP() > 0)
         {
             Running();
+            if(playergun)
+            {
+                gunObject.SetActive(false);
+            }
+
         }
         if(Input.GetKeyUp(KeyCode.LeftShift) || theStatusController.GetCurrentSP() <= 0)
         {
             RunningCancel();
+            if(playergun)
+            {
+                gunObject.SetActive(true);
+            }
+
         }
     }
 
     private void IsGround() //점프전 바닥 체크
     {
-        isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
+        isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.001f);
         theCrosshair.JumpingAnimation(!isGround);
+
     }
     private void TryJump() //점프 시도
     {
@@ -229,7 +301,13 @@ public class PlayerController : MonoBehaviour
         Playeranim.SetTrigger("Jump");   
         theStatusController.DecreaseStamina(100);
         myRigid.velocity = transform.up * jumpForce;
+
+    
     }
+
+
+
+    
 
     private void Running()
     {
@@ -243,6 +321,7 @@ public class PlayerController : MonoBehaviour
         if(isGround)
         {
             Playeranim.SetBool("Player_Run", true);
+          
         }
         theStatusController.DecreaseStamina(10);
         applySpeed = runSpeed;
@@ -257,13 +336,22 @@ public class PlayerController : MonoBehaviour
         if(isGround)
         {
             Playeranim.SetBool("Player_Run", false);
+            
         }
      
     }
 
     private void Move() //플레이어 이동
     {
-        Playeranim.SetBool("Walk" , true);
+        if(playergun)
+        {
+            Playeranim.SetBool("Gunmode_walk" , true);
+        }
+        else
+        {
+            Playeranim.SetBool("Walk" , true);
+        }
+      
         float _moveDirX = Input.GetAxisRaw("Horizontal");
         float _moveDirZ = Input.GetAxisRaw("Vertical");
 
@@ -293,7 +381,14 @@ public class PlayerController : MonoBehaviour
                 isWalk = false;
                 if(isGround)
                 {
-                    Playeranim.SetBool("Walk" , false);
+                    if(playergun)
+                    {
+                        Playeranim.SetBool("Gunmode_walk" , false);
+                    }
+                    else
+                    {
+                        Playeranim.SetBool("Walk" , false);
+                    }
                 }
                  
             }

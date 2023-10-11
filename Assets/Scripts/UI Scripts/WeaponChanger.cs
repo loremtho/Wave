@@ -13,6 +13,8 @@ public class WeaponChanger : MonoBehaviour
     public GunController Gun;
     public AxeController Axe;
 
+    public bool hasGun = false;
+
     // Start is called before the first frame update
     
     public void GunA()
@@ -28,6 +30,7 @@ public class WeaponChanger : MonoBehaviour
                 WeaponObject.SetActive(true);
                 Debug.Log("SciFi Assault 오브젝트를 활성화했습니다.");
                 WeaponSelectionUI.SetActive(false);
+                hasGun = true;
                 
               
             }
@@ -56,6 +59,11 @@ public class WeaponChanger : MonoBehaviour
                 WeaponObject.SetActive(true);
                 Debug.Log("Axe 오브젝트를 활성화했습니다.");
                 WeaponSelectionUI.SetActive(false);
+
+                if(hasGun)
+                {
+                    hasGun = false;
+                }
             }
             else
             {
