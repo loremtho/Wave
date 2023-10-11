@@ -37,7 +37,7 @@ public class ButtonController : MonoBehaviour
 
     public void inGame()
     {
-        SceneManager.LoadScene("TestScene");
+        LoadingSceneManager.LoadScene("TestScene");
     }
 
     public void inShop()
