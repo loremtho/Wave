@@ -161,16 +161,12 @@ public class PlayerController : MonoBehaviour
 
         if (isInGunMode)
         {
-            Debug.Log("플레이어가 GunMode로 변경됨");
             Playeranim.SetBool("Gunmode", true);
             Playeranim.SetBool("Idle", false);
-         
         }
         else
         {
-            Debug.Log("플레이어가 기본 상태로 변경됨");
             Playeranim.SetBool("Gunmode", false);
-           
         }
     }
 
@@ -184,11 +180,7 @@ public class PlayerController : MonoBehaviour
             Playeranim.SetBool("Idle", true);
          
         }
-        else
-        {
-            
-           
-        }
+
     }
 
     
