@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
         zone.gameObject.SetActive(true);
         BatteryRespawner(); // 게임 시작시 배터리 스폰시킴
         isBattle = true;
+        StartCoroutine(InBattle());
 
     }
 
