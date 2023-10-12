@@ -8,26 +8,41 @@ public class BaseCamp : MonoBehaviour
 {
     public Slider BaseHPSlider;
     public TextMeshProUGUI BaseHpTxt;
-    public float MaxHP = 1000f;
-    private float CurHP;
+    public float MaxHP;
+    public float CurHP;
 
-    private float BaseDecreaseTime;
-    private float CurBaseDecreaseTime;
+    [SerializeField]
+    private float decreaseInterval = 5f;
+    private float BaseTimer = 0;
 
     private GameManager gameManager;
 
     private void Start() 
     {
         CurHP = MaxHP;
-        BaseHPSlider.value = CurHP;
+        BaseHPSlider.value = (float) CurHP / (float) MaxHP;
         BaseHpTxt.text = CurHP.ToString();
         gameManager = FindObjectOfType<GameManager>();
     }
 
-    private void BaseCurHP(float newCurHP)
+    private void Update() 
     {
-        CurHP = newCurHP;
-        BaseHPSlider.value = CurHP;
+        if(gameManager.isBattle == true)
+        {
+            BaseTimer += Time.deltaTime;
+
+            if(BaseTimer >= decreaseInterval)
+            {
+                BaseDecrease(20f);
+                BaseTimer = 0f;
+            }    
+        }
+        BaseCurHP();
+    }
+
+    private void BaseCurHP()
+    {
+        BaseHPSlider.value = (float) CurHP / (float) MaxHP;
         BaseHpTxt.text = $"{CurHP} / {MaxHP}";
     }
 
@@ -45,20 +60,12 @@ public class BaseCamp : MonoBehaviour
 
     }
 
-    private void BaseDecrease(float DecreaseBase)
+    public void BaseDecrease(float amount)
     {
         if (CurHP > 0)
         {
-            if (CurBaseDecreaseTime <= BaseDecreaseTime)
-            {
-                CurBaseDecreaseTime++;
-            }
-            else
-            {
-                CurHP -= DecreaseBase; //DecreaseBase 만큼 베이스 체력을 감소시킴
-                CurBaseDecreaseTime = 0;
-            }
-
+            CurHP -= amount; //amount 만큼 베이스 체력을 감소시킴
+            Debug.Log("베이스캠프 체력 감소됨");
         }
         else
         {
@@ -66,26 +73,13 @@ public class BaseCamp : MonoBehaviour
         }
     }
 
-    public void IngBattle() // 스테이지가 실행중일때
+    public void StartDecreaseBaseHP()
     {
-        if(gameManager.isBattle == true)
-        {
-            StartCoroutine(BaseHPDecreaseStart()); // 베이스캠프 자동체력감소 실행
-        }
-        else
-        {
-            StopCoroutine(BaseHPDecreaseStart()); // 종료
-        }
+        gameManager.isBattle = true;
     }
-
-    public IEnumerator BaseHPDecreaseStart()
+    public void EndDecreaseBaseHP()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(5f); // 5초 대기
-
-            BaseDecrease(20f); // 5초마다 20씩 베이스캠프 체력을 감소시킴
-        }
+        gameManager.isBattle = false;
     }
 
     private void OnTriggerEnter(Collider other) 
@@ -111,6 +105,8 @@ public class BaseCamp : MonoBehaviour
             Debug.Log("베이스캠프 체력 : " + CurHP);
         }
     }
+
+    
     
     
 }

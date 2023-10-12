@@ -83,7 +83,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         
-        theWM = FindObjectOfType<WeaponManager>(); 
+        theWM = FindObjectOfType<WeaponManager>();
+        baseCamp = GetComponent<BaseCamp>();
         
         //weaponchanger.GunA(); //플레이어 무기 타입 결정 임시
         
@@ -97,7 +98,6 @@ public class GameManager : MonoBehaviour
         zone.gameObject.SetActive(true);
         BatteryRespawner(); // 게임 시작시 배터리 스폰시킴
         isBattle = true;
-        StartCoroutine(InBattle());
 
     }
 
@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
         }
         Battery_prefab_Ins.Clear(); // 리스트 비워서 중복 파괴 방지
         isBattle = false;
+        baseCamp.EndDecreaseBaseHP();
         stage++;
 
     }
@@ -198,6 +199,24 @@ public class GameManager : MonoBehaviour
 
         LastkillcountTxt.text = string.Format("Kill : {0:n0}",player.killcount);
 
+    }
+
+    public void StageCheck()// 스테이지 상태 체크 함수
+    {
+        // 아니면 스테이지가 6에 진입되면 바로 클리어 시켜버려도 됨
+        
+        if(stage == 5 && baseCamp.CurHP > 0) //임시 조건 스테이지가 5에 도달하고 베이스캠프 체력이 0보다 클때
+        {
+            LastUi();
+        }
+        else if(stage <= 5 && baseCamp.CurHP <= 0) // 임시 조건 스테이지가 5이하이고 베이스캠프 체력이 0이하일때 
+        {
+            //실패창 띄우기
+        }
+        else
+        {
+            //결과창 실패창 모두 비활성화
+        }
     }
 
     private void BatteryRespawner() //배터리 프리팹을 스폰시킴

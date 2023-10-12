@@ -7,7 +7,7 @@ using UnityEngine;
 public class ItemEffect
 {
     public string itemName; //아이템의 이름 (키값)
-    [Tooltip("HP, SP,  DP, HUNGRY, THIRSTY, SATISFY 만 가능합니다.")]
+    [Tooltip("HP, SP,  DP, Battery 만 가능합니다.")]
     public string[] part; //부위
     public int[] num; //수치
     
@@ -78,7 +78,7 @@ public class ItemEffectDatabase : MonoBehaviour
                                 baseCamp.Heal(itemEffects[x].num[y]);
                                 break;
                             default:
-                                Debug.Log("잘못된 Status 부위.HP, SP,  DP 만 가능합니다. ");
+                                Debug.Log("잘못된 Status 부위.HP, SP,  DP, BaseCamp 만 가능합니다. ");
                                 break;
 
                         }
