@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
         }
         Battery_prefab_Ins.Clear(); // 리스트 비워서 중복 파괴 방지
         isBattle = false;
-        baseCamp.EndDecreaseBaseHP();
+        //baseCamp.EndDecreaseBaseHP(); 굳이?
         stage++;
 
     }
