@@ -6,9 +6,8 @@ using Redcode.Pools;
 
 public class Enemy : MonoBehaviour 
 {
-
-  
-
+    public enum Type {A, B, C};
+    public Type enemyType;
    
     public Transform target;
     NavMeshAgent ai;
@@ -27,7 +26,9 @@ public class Enemy : MonoBehaviour
 
     private PlayerController player;
 
-    private GameManager gameManager;
+    public GameManager gameManager;
+
+    NavMeshAgent nav;
 
    
     [SerializeField]
@@ -67,6 +68,9 @@ public class Enemy : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
         ai = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
+        nav = GetComponent<NavMeshAgent>();
+
+        Invoke("ChaseStart", 2);
        
         currentHp = Hp;
   
@@ -84,9 +88,10 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if(isChase) //
+        if(nav.enabled)
         {
-            ai.SetDestination(target.position); //추적코드
+            nav.SetDestination(target.position);
+            nav.isStopped = !isChase;
         }
 
     }
@@ -95,6 +100,20 @@ public class Enemy : MonoBehaviour
     {
         float targetRadius = 1.5f;
         float targetRange = 3f;
+
+        switch (enemyType){
+            case Type.A :
+            targetRadius = 1.5f;
+            targetRange = 3f;
+            break;
+            case Type.B :
+            targetRadius = 1.5f;
+            targetRange = 6f;
+            break;
+            case Type.C:
+            
+            break;
+        }
 
         RaycastHit[] rayHits =
         Physics.SphereCastAll(transform.position,
@@ -109,20 +128,35 @@ public class Enemy : MonoBehaviour
         }
 
 
+
     }
 
     IEnumerator Attack()
     {
+        isChase = false;
         isAttack = true;
         anim.SetBool("isAttack", true);
-        meleeArea.enabled = true;
 
-        yield return new WaitForSeconds(0.2f);
-        meleeArea.enabled = true;
+        switch(enemyType) {
+            case Type.A:
+            yield return new WaitForSeconds(0.2f);
+            meleeArea.enabled = true;
 
-        yield return new WaitForSeconds(1f);
-        meleeArea.enabled = false;
-        
+            yield return new WaitForSeconds(0.5f);
+            meleeArea.enabled = false;
+
+            yield return new WaitForSeconds(0.5f);
+            isChase = false;
+
+            break;
+            case Type.B:
+            break;
+            case Type.C:
+            break;
+        }
+    
+
+        isChase = true;
         isAttack = false;
         anim.SetBool("isAttack", false);
         
@@ -132,19 +166,27 @@ public class Enemy : MonoBehaviour
      public void TakeDamage(int damage)
     {
         currentHp -= damage;
-         player.AddHitScore(20);
+        player.AddHitScore(20);
 
-        // 체력이 0 이하로 떨어지면 몬스터를 파괴
+        // 체력이 0 이하로 떨어지면 몬스터 등록수를 -한후  파괴
         if (currentHp <= 0)
         {
+            switch(enemyType){
+                case Type.A:
+                gameManager.enemyCntA--;
+                break;
+                case Type.B:
+                gameManager.enemyCntA--;
+                break;
+                case Type.C:
+                gameManager.enemyCntA--;
+                break;
+            }
             Die();
-            
-            
-
         }
 
         anim.SetTrigger("Hit");
-        muzzleFlashs.Play();
+       // muzzleFlashs.Play();
     }
     private void Die()
     {

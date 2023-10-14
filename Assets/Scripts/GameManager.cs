@@ -59,6 +59,11 @@ public class GameManager : MonoBehaviour
     public Transform[] enemyZone; 
     public GameObject[] enemies;
     public List<int> enemyList;
+
+    public int enemyCntA;
+    public int enemyCntB;
+    public int enemyCntC;
+
     //배터리 스폰 관리*******************
 
     public GameObject Battery_prefab;
@@ -73,6 +78,8 @@ public class GameManager : MonoBehaviour
     public BaseCamp baseCamp;
 
     public WeaponChanger weaponchanger; //무기 변경 스크립트
+
+    public ButtonController buttonController;
 
     void Awake()
     {
@@ -116,17 +123,34 @@ public class GameManager : MonoBehaviour
         }
         Battery_prefab_Ins.Clear(); // 리스트 비워서 중복 파괴 방지
         isBattle = false;
-        //baseCamp.EndDecreaseBaseHP(); 굳이?
+        //baseCamp.EndDecreaseBaseHP();
         stage++;
 
     }
 
     IEnumerator InBattle()
     {
+        //if(stage % 5 ==0) 나중에 이런식으로 다 덮어서 보스 소환도 고려
+
         for(int index = 0; index < stage; index++)
         {
             int ran = Random.Range(0 ,2); //존 개수 몬스터 늘릴시 갯수 수정
             enemyList.Add(ran);
+
+            switch (ran) {
+                case 0:
+                enemyCntA++;
+                break;
+                case 1:
+                enemyCntB++;
+                break;
+                case 2:
+                enemyCntC++;
+                break;
+     
+            }
+
+
         }
         while(enemyList.Count > 0)
         {
@@ -134,12 +158,19 @@ public class GameManager : MonoBehaviour
             GameObject instantEnemy = Instantiate(enemies[enemyList[0]], enemyZone[ranZone].position, enemyZone[ranZone].rotation);
             Enemy enemy = instantEnemy.GetComponent<Enemy>();
             enemy.target = player.transform;
-           
+            enemy.gameManager = this;
             enemyList.RemoveAt(0);
             yield return new WaitForSeconds(5);
         } 
 
-         StageEnd();
+        while(enemyCntA + enemyCntB + enemyCntC > 0)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(4f);
+
+        StageEnd();
        
     }
 
@@ -162,13 +193,11 @@ public class GameManager : MonoBehaviour
                 theWM.WeaponOut();
             }
         }
-
         if(isBattle)
         {
             playTime += Time.deltaTime;
         }
-
-
+        StageCheck();
         return;
 
    
@@ -194,7 +223,7 @@ public class GameManager : MonoBehaviour
 
     public void LastUi() //클리어시 출력 클리어 UI
     {
-         LastscoreTxt.text = string.Format("Score : {0:n0}",player.score);
+        LastscoreTxt.text = string.Format("Score : {0:n0}",player.score);
 
         LasthitscoreTxt.text = string.Format("Hit : {0:n0}",player.hitscore);
 
@@ -206,18 +235,11 @@ public class GameManager : MonoBehaviour
     {
         // 아니면 스테이지가 6에 진입되면 바로 클리어 시켜버려도 됨
         
-        if(stage == 5 && baseCamp.CurHP > 0) //임시 조건 스테이지가 5에 도달하고 베이스캠프 체력이 0보다 클때
+        if(stage == 2) 
         {
-            LastUi();
+            buttonController.inEnding();
         }
-        else if(stage <= 5 && baseCamp.CurHP <= 0) // 임시 조건 스테이지가 5이하이고 베이스캠프 체력이 0이하일때 
-        {
-            //실패창 띄우기
-        }
-        else
-        {
-            //결과창 실패창 모두 비활성화
-        }
+   
     }
 
     private void BatteryRespawner() //배터리 프리팹을 스폰시킴
