@@ -46,10 +46,6 @@ public class PlayerShooter : MonoBehaviour
         //Vector3 offset = new Vector3(-0.1f, -0.13f, 0.3f); // 원하는 내리기 위치 (여기서는 -0.1f만큼 아래로 이동)
         //gunPivot.position += offset;
 
-        
-        
-        
-
         //IK를 사용하여 왼속의 위치와 회전을 왼쪽 손잡이에 맞춤
         
         //playerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand,1.0f);
@@ -63,7 +59,7 @@ public class PlayerShooter : MonoBehaviour
         playerAnimator.SetIKRotationWeight(AvatarIKGoal.RightHand,1.0f);
 
 
-        playerAnimator.SetIKPosition(AvatarIKGoal.RightHand,rightHandMount.position);
+        //playerAnimator.SetIKPosition(AvatarIKGoal.RightHand,rightHandMount.position);
         //playerAnimator.SetIKRotation(AvatarIKGoal.RightHand,rightHandMount.rotation);
         
          
