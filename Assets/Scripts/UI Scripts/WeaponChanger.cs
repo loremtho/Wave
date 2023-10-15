@@ -30,6 +30,8 @@ public class WeaponChanger : MonoBehaviour
                 WeaponObject.SetActive(true);
                 Debug.Log("SciFi Assault 오브젝트를 활성화했습니다.");
                 WeaponSelectionUI.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 hasGun = true;
                 
               
@@ -59,6 +61,8 @@ public class WeaponChanger : MonoBehaviour
                 WeaponObject.SetActive(true);
                 Debug.Log("Axe 오브젝트를 활성화했습니다.");
                 WeaponSelectionUI.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
 
                 if(hasGun)
                 {

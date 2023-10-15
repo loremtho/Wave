@@ -26,7 +26,8 @@ public class ButtonController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-             inWeaponSelect();
+
+            inWeaponSelect();
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -53,13 +54,16 @@ public class ButtonController : MonoBehaviour
 
     public void inWeaponSelect()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         WeaponSelectionUI.SetActive(true);
     }
 
     public void outWeaponSelect()
     {
         WeaponSelectionUI .SetActive(false);
-
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void SelectionGun()
@@ -70,14 +74,15 @@ public class ButtonController : MonoBehaviour
 
     public void SelectionAxe()
     {
-         weaponchanger.AxeA();
-         WeaponSelectionUI .SetActive(false);
-
+        weaponchanger.AxeA();
+        WeaponSelectionUI .SetActive(false);
     }
 
      public void inEnding()
     {
         EndingUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         gameManager.LastUi();
 
     }
@@ -85,6 +90,8 @@ public class ButtonController : MonoBehaviour
     public void outEnding()
     {
         EndingUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
     }
 

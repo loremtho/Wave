@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class GunController : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class GunController : MonoBehaviour
     private Crosshair theCrosshair;
 
     [SerializeField]
-    private GameObject hit_effect_prefab;
+    private GameObject hit_effect;
     [SerializeField]
     private TrailRenderer BulletTrail;
     [SerializeField]
@@ -126,6 +127,11 @@ public class GunController : MonoBehaviour
 
     }
 
+    private void Calloffhit()
+    {
+        theCrosshair.offHit();
+    }
+
 
 
     //맞는 판정
@@ -146,9 +152,10 @@ public class GunController : MonoBehaviour
             {
                 enemy.TakeDamage(currentGun.damage);
             }
-
-            var clone = Instantiate(hit_effect_prefab, hitlnfo.point, Quaternion.LookRotation(hitlnfo.normal));
-            Destroy(clone, 1f);
+            var clone = Instantiate(hit_effect, hitlnfo.point, Quaternion.LookRotation(hitlnfo.normal));
+            Destroy(clone, 0.7f);
+            theCrosshair.onHit();
+            Invoke("Calloffhit", 0.1f);
 
             // 방향을 수정하지 않고 그대로 사용
             FireBullet(raycastDirection);

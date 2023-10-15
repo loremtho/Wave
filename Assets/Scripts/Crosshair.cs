@@ -14,6 +14,9 @@ public class Crosshair : MonoBehaviour
     private GameObject go_crosshairHUD;
     [SerializeField]
     private GunController theGunController;
+    [SerializeField]
+    private GameObject Hit_Crosshair;
+
 
 
     public void WalkingAnimation(bool _flag)
@@ -75,6 +78,15 @@ public class Crosshair : MonoBehaviour
             }
         }
             
+    }
+
+    public void onHit()
+    {
+        Hit_Crosshair.gameObject.SetActive(true);
+    }
+    public void offHit()
+    {
+        Hit_Crosshair.gameObject.SetActive(false);
     }
 
     public float GetAccuracy()
