@@ -242,7 +242,7 @@ public class GameManager : MonoBehaviour
     {
         // 아니면 스테이지가 6에 진입되면 바로 클리어 시켜버려도 됨
         
-        if(stage == 20) 
+        if(stagecount == 6) 
         {
             buttonController.inEnding();
         }
