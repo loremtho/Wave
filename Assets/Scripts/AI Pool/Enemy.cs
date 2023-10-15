@@ -176,6 +176,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
+        isChase = false;
         player.AddHitScore(20);
 
         // 체력이 0 이하로 떨어지면 몬스터 등록수를 -한후  파괴
@@ -196,8 +197,22 @@ public class Enemy : MonoBehaviour
         }
 
         anim.SetTrigger("Hit");
-       // muzzleFlashs.Play();
+
+        StartCoroutine(ResumeChaseAfterDelay(1f));
+   
     }
+
+    private IEnumerator ResumeChaseAfterDelay(float delay)
+    {
+        anim.SetTrigger("Hit");
+        yield return new WaitForSeconds(delay);
+        isChase = true;
+    }
+
+
+
+
+
     private void Die()
     {
         Destroy(gameObject);

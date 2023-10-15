@@ -16,6 +16,7 @@ TagManager:
   - Battery
   - BaseCamp
   - CinemachineTarget
+  - Monster
   layers:
   - Default
   - TransparentFX
