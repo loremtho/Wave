@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class DefenseTower : MonoBehaviour
 {
-    [SerializeField] private string towerName; //¹æ¾îÅ¸¿öÀÇ ÀÌ¸§
-    [SerializeField] private float range; //¹æ¾îÅ¸¿öÀÇ »çÁ¤ °Å¸®.
-    [SerializeField] private int damage; //°ø°Ý·Â
-    [SerializeField] private float rateOfAccurasy; //Á¤È®µµ
-    [SerializeField] private float rateOfFire; //¿¬»ç¼Óµµ
-    private float currentRateOfFire; //¿¬»ç¼Óµµ °è»ê
-    [SerializeField] private float viewAngle; //½Ã¾ß°¢
-    [SerializeField] private float spinSpeed; //Æ÷½Å È¸Àü ¼Óµµ.
-    [SerializeField] private LayerMask layerMask; //¿òÁ÷ÀÌ´Â ´ë»ó¸¸ Å¸°ÙÀ¸·Î ÁöÁ¤(ÇÃ·¹ÀÌ¾î)
-    [SerializeField] private Transform tf_TopGun; //¹æ¾îÅ¸¿öÀÇ Æ÷Å¾.
-    [SerializeField] private ParticleSystem particle_MuzzleFlash; //ÃÑ±¸ ¼¶±¤.
-    [SerializeField] private GameObject go_HitEffect_Prefab; //ÀûÁß ÀÌÆåÆ®.
+    [SerializeField] private string towerName; //ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+    [SerializeField] private float range; //ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½.
+    [SerializeField] private int damage; //ï¿½ï¿½ï¿½Ý·ï¿½
+    [SerializeField] private float rateOfAccurasy; //ï¿½ï¿½È®ï¿½ï¿½
+    [SerializeField] private float rateOfFire; //ï¿½ï¿½ï¿½ï¿½Óµï¿½
+    private float currentRateOfFire; //ï¿½ï¿½ï¿½ï¿½Óµï¿½ ï¿½ï¿½ï¿½
+    [SerializeField] private float viewAngle; //ï¿½Ã¾ß°ï¿½
+    [SerializeField] private float spinSpeed; //ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½Óµï¿½.
+    [SerializeField] private LayerMask layerMask; //ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½Ã·ï¿½ï¿½Ì¾ï¿½)
+    [SerializeField] private Transform tf_TopGun; //ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¾.
+    [SerializeField] private ParticleSystem particle_MuzzleFlash; //ï¿½Ñ±ï¿½ ï¿½ï¿½ï¿½ï¿½.
+    [SerializeField] private GameObject go_HitEffect_Prefab; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®.
 
-    private RaycastHit hitInfo; //±¤¼± Ãæµ¿ °´Ã¼ÀÇ Á¤º¸ ÀúÀå
+    private RaycastHit hitInfo; //ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¿ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private Animator anim; 
     private AudioSource theAudio;
 
-    private bool isFindTarget = false; //Àû Å¸°Ù ¹ß°ß½Ã true
-    private bool isAttack = false; //ÃÑ±¸ ¹æÇâ°ú Àû ¹æÇâÀÌ ÀÏÄ¡ÇÒ ½Ã true
+    private bool isFindTarget = false; //ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ß°ß½ï¿½ true
+    private bool isAttack = false; //ï¿½Ñ±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ true
 
-    private Transform tf_Target; //ÇöÀç ¼³Á¤µÈ Å¸°Ù
+    private Transform tf_Target; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½
 
     [SerializeField] private AudioClip sound_Fire;
     // Start is called before the first frame update
@@ -61,7 +61,7 @@ public class DefenseTower : MonoBehaviour
         {
             Transform _targetTf = _targets[i].transform;
 
-            if(_targetTf.tag == "Player")
+            if(_targetTf.tag == "Monster")
             {
                 Vector3 _direction = (_targetTf.position - tf_TopGun.position).normalized;
                 float _angle = Vector3.Angle(_direction, tf_TopGun.forward);
@@ -116,9 +116,9 @@ public class DefenseTower : MonoBehaviour
                     GameObject _temp = Instantiate(go_HitEffect_Prefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
                     Destroy(_temp, 1f);
 
-                    if (hitInfo.transform.name == "Player")
+                    if (hitInfo.transform.tag == "Monster")
                     {
-                        hitInfo.transform.GetComponent<StatusController>().DecreaseHP(damage);
+                        hitInfo.transform.GetComponent<Enemy>().TakeDamage(damage);
                     }
                 }
          

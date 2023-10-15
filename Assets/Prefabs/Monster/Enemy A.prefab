@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 2799247705008336254}
   - component: {fileID: 2799247705008336255}
   - component: {fileID: 2799247705008336224}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Enemy A
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,6 +213,7 @@ MonoBehaviour:
   anim: {fileID: 2799247705008336252}
   isChase: 0
   gameManager: {fileID: 0}
+  statusController: {fileID: 0}
   Hp: 5
 --- !u!1 &5256287375934151459
 GameObject:
