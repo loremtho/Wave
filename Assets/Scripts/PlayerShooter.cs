@@ -17,6 +17,10 @@ public class PlayerShooter : MonoBehaviour
     private PlayerInput playerInput;
     Animator playerAnimator;
 
+    public PlayerController playerController;
+
+    
+
   
     public void Start()
     {
@@ -59,7 +63,13 @@ public class PlayerShooter : MonoBehaviour
         playerAnimator.SetIKRotationWeight(AvatarIKGoal.RightHand,1.0f);
 
 
-        //playerAnimator.SetIKPosition(AvatarIKGoal.RightHand,rightHandMount.position);
+        if(playerController.playergun)
+        {
+            playerAnimator.SetIKPosition(AvatarIKGoal.RightHand,rightHandMount.position);
+        }
+       
+       
+     
         //playerAnimator.SetIKRotation(AvatarIKGoal.RightHand,rightHandMount.rotation);
         
          

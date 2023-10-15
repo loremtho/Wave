@@ -33,16 +33,20 @@ public class PlayerController : MonoBehaviour
     private bool isGround = true;
     public bool aim = true;
 
+    
+
     private bool isInGunMode = false;
 
     private bool isDefaultmode = true;
 
-    private bool playergun = false;
+    public bool playergun = false;
    
     //움직임 체크 변수
     private Vector3 lastPos;
     
     public Animator Playeranim;
+
+    
 
 
 
