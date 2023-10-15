@@ -39,7 +39,9 @@ public class PlayerController : MonoBehaviour
 
     private bool isDefaultmode = true;
 
-    public bool playergun = false;
+    public bool playergun = false;  //총을 들었을떄 모드
+
+    private bool playergunActive = false; //달리거나 총이 순간 필요없을때 사용
    
     //움직임 체크 변수
     private Vector3 lastPos;
@@ -151,11 +153,13 @@ public class PlayerController : MonoBehaviour
             // 오브젝트가 활성화되면 GunMode로 변경
             SetGunMode(true);
             playergun = true;
+            playergunActive = true;
         }
         else
         {
             SetDefaultMode(true);
             SetGunMode(false);
+            playergun = false;
         }
 
     }
@@ -253,7 +257,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftShift) && theStatusController.GetCurrentSP() > 0)
         {
             Running();
-            if(playergun)
+            if(playergunActive)
             {
                 gunObject.SetActive(false);
             }
@@ -262,8 +266,10 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.LeftShift) || theStatusController.GetCurrentSP() <= 0)
         {
             RunningCancel();
-            if(playergun)
+            
+            if(playergunActive)
             {
+                playergun = true;
                 gunObject.SetActive(true);
             }
 
