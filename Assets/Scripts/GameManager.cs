@@ -83,6 +83,9 @@ public class GameManager : MonoBehaviour
     public ButtonController buttonController;
     public StatusController statusController;
 
+    [SerializeField]
+    private string bgm;
+
     void Awake()
     {
         enemyList = new List<int>();
@@ -95,6 +98,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         theWM = FindObjectOfType<WeaponManager>();
         baseCamp = GetComponent<BaseCamp>();
+
+        SoundManager.instance.PlaySE(bgm);
         
         //weaponchanger.GunA(); //플레이어 무기 타입 결정 임시
         

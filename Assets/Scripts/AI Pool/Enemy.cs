@@ -38,6 +38,10 @@ public class Enemy : MonoBehaviour
 
     private int currentHp;
 
+    [SerializeField]
+    
+    private string monsterAtt;
+
 
     void FreezeVelocity()
     {
@@ -138,6 +142,7 @@ public class Enemy : MonoBehaviour
         isChase = false;
         isAttack = true;
         anim.SetBool("isAttack", true);
+        SoundManager.instance.PlaySE(monsterAtt);
 
         switch(enemyType) {
             case Type.A:
