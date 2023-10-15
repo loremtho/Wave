@@ -1,6 +1,7 @@
 using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -72,6 +73,12 @@ public class StatusController : MonoBehaviour
     private Slider dpbar;*/
 
     public PlayerController playerController;
+
+    public TextMeshProUGUI hpvalue;
+    public TextMeshProUGUI dpvalue;
+
+    public TextMeshProUGUI spvalue;
+    
 
     private const int HP = 0, DP = 1, SP = 2, HUNGRY = 3, THIRSTY = 4, SATISFY = 5;
 
@@ -172,6 +179,9 @@ public class StatusController : MonoBehaviour
         images_Gauge[HP].fillAmount = (float)currentHp / hp;
         images_Gauge[SP].fillAmount = (float)currentSp / sp;
         images_Gauge[DP].fillAmount = (float)currentDp / dp;
+        hpvalue.text = currentHp.ToString();
+        dpvalue.text = currentDp.ToString();
+        spvalue.text = currentSp.ToString();
         /*images_Gauge[HUNGRY].fillAmount = (float)currentHungry / hungry;
         images_Gauge[THIRSTY].fillAmount = (float)currentThirsty / thirsty;
         images_Gauge[SATISFY].fillAmount = (float)currentSatisfy / satisfy;*/
