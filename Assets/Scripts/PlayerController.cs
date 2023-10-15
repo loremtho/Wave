@@ -420,5 +420,11 @@ public class PlayerController : MonoBehaviour
         //gunPivot.position = rightHandMount.position;
     }
 
+    public void damageprocess()
+    {
+        Playeranim.SetTrigger("Hit");
+    }
+
+
     
 }

@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
     public WeaponChanger weaponchanger; //무기 변경 스크립트
 
     public ButtonController buttonController;
+    public StatusController statusController;
 
     void Awake()
     {
@@ -161,7 +162,10 @@ public class GameManager : MonoBehaviour
             Enemy enemy = instantEnemy.GetComponent<Enemy>();
             enemy.target = player.transform;
             enemy.gameManager = this;
+            enemy.statusController = statusController;
+        
             enemyList.RemoveAt(0);
+            
             yield return new WaitForSeconds(1);
         } 
 

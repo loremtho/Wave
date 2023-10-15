@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour
 
     public GameManager gameManager;
 
+    public StatusController statusController;
+
     NavMeshAgent nav;
 
    
@@ -162,8 +164,16 @@ public class Enemy : MonoBehaviour
         
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && isAttack) // 플레이어 태그와 공격 중인지 확인
+        {
+            statusController.DecreaseHP(20);
+        }
+    }
 
-     public void TakeDamage(int damage)
+
+    public void TakeDamage(int damage)
     {
         currentHp -= damage;
         player.AddHitScore(20);

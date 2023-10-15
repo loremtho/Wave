@@ -68,6 +68,8 @@ public class StatusController : MonoBehaviour
     [SerializeField]
     private Slider dpbar;*/
 
+    public PlayerController playerController;
+
     private const int HP = 0, DP = 1, SP = 2, HUNGRY = 3, THIRSTY = 4, SATISFY = 5;
 
 
@@ -199,10 +201,13 @@ public class StatusController : MonoBehaviour
         if(currentDp > 0)
         {
             DecreaseDP(_count);
+            playerController.damageprocess();
             return;
         }
 
         currentHp-= _count;
+        playerController.damageprocess();
+        
 
         if(currentHp <= 0)
         {
@@ -316,6 +321,7 @@ public class StatusController : MonoBehaviour
     {
         return currentSp;
     }
+
 
 }
 
