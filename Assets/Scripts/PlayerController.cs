@@ -26,6 +26,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpForce;
 
+    [SerializeField] 
+    private string Walk_sound;
+    [SerializeField] 
+    private string Run_sound;
+
+    [SerializeField] 
+    private string Beath_sound;
+
     //상태 변수
     private bool isWalk = false;
     private bool isRun = false;
@@ -319,6 +327,7 @@ public class PlayerController : MonoBehaviour
             Crouch();
 
         //theGunController.CancelFinSight();
+
 
         isRun = true;
         theCrosshair.RunningAnimation(isRun);

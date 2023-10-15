@@ -5166,10 +5166,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerName: BasicDefenseTower
-  range: 10
-  damage: 10
+  range: 20
+  damage: 1
   rateOfAccurasy: 0.1
-  rateOfFire: 0.25
+  rateOfFire: 0.28
   viewAngle: 50
   spinSpeed: 50
   layerMask:

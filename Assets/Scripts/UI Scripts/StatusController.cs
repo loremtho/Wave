@@ -12,6 +12,9 @@ public class StatusController : MonoBehaviour
     private int hp;
     private int currentHp;
 
+    [SerializeField] 
+    private string Beath_sound;
+
     //스테미나
     [SerializeField]
     private int sp;

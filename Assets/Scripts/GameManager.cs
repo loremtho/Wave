@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
         isBattle = false;
         //baseCamp.EndDecreaseBaseHP();
         stagecount++;
-        stage += 5;
+        stage += 40;
 
     }
 
