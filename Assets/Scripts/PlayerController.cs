@@ -85,6 +85,8 @@ public class PlayerController : MonoBehaviour
     public int hitscore = 0;
     public int killcount = 0;
 
+    
+
     public void AddScore(int points) //플레이어 점수 추가
     {
         score += points;

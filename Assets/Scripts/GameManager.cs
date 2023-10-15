@@ -35,13 +35,14 @@ public class GameManager : MonoBehaviour
     bool isStop;
 
     //인게임 UI***********************
-    public int stage = 20;
+    public int stage = 20; //난이도 설정
     public Text stageTxt;
     public Text scoreTxt;
     public Text playTimeTxt;
     public Text hitscoreTxt;
     public Text killcountTxt;
     public float playTime;
+    public int stagecount = 1; //현재 스테이지
     float timer;
     //클리어 캔버스 UI*****************
 
@@ -124,6 +125,7 @@ public class GameManager : MonoBehaviour
         Battery_prefab_Ins.Clear(); // 리스트 비워서 중복 파괴 방지
         isBattle = false;
         //baseCamp.EndDecreaseBaseHP();
+        stagecount++;
         stage += 5;
 
     }
@@ -206,7 +208,7 @@ public class GameManager : MonoBehaviour
 
     void LateUpdate() 
     {
-        stageTxt.text = "Wave " + stage + " / 5";
+        stageTxt.text = "Wave " + stagecount + " / 5";
 
         scoreTxt.text = string.Format("Score : {0:n0}",player.score);
 
