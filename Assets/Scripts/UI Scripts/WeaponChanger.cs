@@ -22,9 +22,11 @@ public class WeaponChanger : MonoBehaviour
         Transform playerWeapon = player.transform.FindDeepChild("SciFi Assault");
         if (playerWeapon != null)
         {
+            
             GameObject WeaponObject = playerWeapon.gameObject;
             if (!WeaponObject.activeSelf)
             {
+                DeactivateCurrentWeapon();
                 Gun.GunMounting();
                 theWM.SetCurrentWeaponType("Rifle");
                 WeaponObject.SetActive(true);
@@ -33,6 +35,7 @@ public class WeaponChanger : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 hasGun = true;
+                
                 
               
             }
@@ -56,6 +59,7 @@ public class WeaponChanger : MonoBehaviour
             GameObject WeaponObject = playerWeapon.gameObject;
             if (!WeaponObject.activeSelf)
             {
+                DeactivateCurrentWeapon();
                 Axe.AxeMounting();
                 theWM.SetCurrentWeaponType("AXE");
                 WeaponObject.SetActive(true);
@@ -80,6 +84,23 @@ public class WeaponChanger : MonoBehaviour
         }
 
     }
+
+    private void DeactivateCurrentWeapon()
+    {
+    // 현재 무기를 찾아서 비활성화
+        Transform currentWeapon = player.transform.FindDeepChild("SciFi Assault");
+        if (currentWeapon != null)
+        {
+            currentWeapon.gameObject.SetActive(false);
+        }
+    
+        // 또는 Axe의 경우
+        currentWeapon = player.transform.FindDeepChild("Axe");
+        if (currentWeapon != null)
+        {
+            currentWeapon.gameObject.SetActive(false);
+        }
+} 
 
     
 }
