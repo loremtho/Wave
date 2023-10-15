@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
     private WeaponManager theWM;
     public BaseCamp baseCamp;
 
+    public GunController gunController;
+
     public WeaponChanger weaponchanger; //무기 변경 스크립트
 
     public ButtonController buttonController;
@@ -169,6 +171,7 @@ public class GameManager : MonoBehaviour
             enemy.target = player.transform;
             enemy.gameManager = this;
             enemy.statusController = statusController;
+            enemy.gunController = gunController;
         
             enemyList.RemoveAt(0);
             

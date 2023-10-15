@@ -154,12 +154,17 @@ public class GunController : MonoBehaviour
             }
             var clone = Instantiate(hit_effect, hitlnfo.point, Quaternion.LookRotation(hitlnfo.normal));
             Destroy(clone, 0.7f);
-            theCrosshair.onHit();
-            Invoke("Calloffhit", 0.1f);
+        
 
             // 방향을 수정하지 않고 그대로 사용
             FireBullet(raycastDirection);
         }
+    }
+
+    public void hitreaction()
+    {
+        theCrosshair.onHit();
+        Invoke("Calloffhit", 0.1f);
     }
 
     private void FireBullet(Vector3 shootDirection)   //투사체 새로 한것
