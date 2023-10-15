@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 6c4994e2a1e7edc4c962badf1634890e
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _RedMask: {instanceID: 0}
+  - _RedTexture: {instanceID: 0}
+  - _BlueMask: {instanceID: 0}
+  - _BlueTexture: {instanceID: 0}
+  - _Albedo: {instanceID: 0}
+  - _Cubmap: {instanceID: 0}
+  - _CubemapBlured: {instanceID: 0}
+  - _EmissionMap: {instanceID: 0}
+  - _RedNormals: {instanceID: 0}
+  - _NormalMap: {instanceID: 0}
+  - _SmoothnessMap: {instanceID: 0}
+  - _MetallicMap: {instanceID: 0}
+  - _texcoord: {instanceID: 0}
+  - unity_Lightmaps: {instanceID: 0}
+  - unity_LightmapsInd: {instanceID: 0}
+  - unity_ShadowMasks: {instanceID: 0}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 045d1f63e0d0b86489496ffdee2390f1
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _Albedo: {instanceID: 0}
+  - _EmissionMap: {instanceID: 0}
+  - _NormalMap: {instanceID: 0}
+  - _SmoothnessMap: {instanceID: 0}
+  - _MetallicMap: {instanceID: 0}
+  - _texcoord: {instanceID: 0}
+  - unity_Lightmaps: {instanceID: 0}
+  - unity_LightmapsInd: {instanceID: 0}
+  - unity_ShadowMasks: {instanceID: 0}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

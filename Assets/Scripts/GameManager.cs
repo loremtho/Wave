@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     bool isStop;
 
     //인게임 UI***********************
-    public int stage;
+    public int stage = 20;
     public Text stageTxt;
     public Text scoreTxt;
     public Text playTimeTxt;
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
         Battery_prefab_Ins.Clear(); // 리스트 비워서 중복 파괴 방지
         isBattle = false;
         //baseCamp.EndDecreaseBaseHP();
-        stage++;
+        stage += 5;
 
     }
 
@@ -160,7 +160,7 @@ public class GameManager : MonoBehaviour
             enemy.target = player.transform;
             enemy.gameManager = this;
             enemyList.RemoveAt(0);
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(1);
         } 
 
         while(enemyCntA + enemyCntB + enemyCntC > 0)
@@ -235,7 +235,7 @@ public class GameManager : MonoBehaviour
     {
         // 아니면 스테이지가 6에 진입되면 바로 클리어 시켜버려도 됨
         
-        if(stage == 2) 
+        if(stage == 20) 
         {
             buttonController.inEnding();
         }
