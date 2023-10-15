@@ -215,6 +215,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   statusController: {fileID: 0}
   Hp: 5
+  monsterAtt: Monsteratt
 --- !u!1 &5256287375934151459
 GameObject:
   m_ObjectHideFlags: 0
